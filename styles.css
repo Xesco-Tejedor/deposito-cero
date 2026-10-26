@@ -257,9 +257,62 @@ kbd{background:var(--ink-3);border:1px solid var(--cyan);border-radius:4px;paddi
 .walker{position:absolute;bottom:8%;width:8.5%;left:78%;pointer-events:none;z-index:4;transition:left .6s linear}
 #stage .walker svg{position:static;inset:auto;width:100%;height:auto;display:block;overflow:visible}
 .walker.flip svg{transform:scaleX(-1)}
-.walker.walking .fig{animation:nicoBob .32s ease-in-out infinite}
-.walker.walking .legA{animation:stepA .32s steps(1) infinite}
-.walker.walking .legB{animation:stepB .32s steps(1) infinite}
-@keyframes stepA{0%,49%{opacity:1}50%,100%{opacity:.18}}
-@keyframes stepB{0%,49%{opacity:.18}50%,100%{opacity:1}}
-@keyframes nicoBob{50%{transform:translateY(-2%)}}
+
+/* ===== v5: arte caricaturesco — animaciones de escena y personaje ===== */
+/* motas de polvo en los haces de luz */
+.mote{animation:moteFloat 7s ease-in-out infinite}
+.mote.m2{animation-duration:9s;animation-delay:-2s}
+.mote.m3{animation-duration:6s;animation-delay:-3.4s}
+.mote.m4{animation-duration:10s;animation-delay:-1.2s}
+@keyframes moteFloat{
+  0%,100%{transform:translate(0,0);opacity:.9}
+  33%{transform:translate(6px,14px);opacity:.5}
+  66%{transform:translate(-5px,26px);opacity:.75}
+}
+/* vapor de taza, soldador y alcantarilla */
+.steam{animation:steamWisp 3.6s ease-in-out infinite}
+.steam.s2{animation-delay:-1.8s}
+@keyframes steamWisp{
+  0%{transform:translateY(4px);opacity:0}
+  35%{opacity:.65}
+  100%{transform:translateY(-10px);opacity:0}
+}
+/* cursor del CRT */
+.cursorBlk{animation:blink 1.1s steps(1) infinite}
+/* bobinas de cinta y contestador */
+.reelS{transform-box:fill-box;transform-origin:center;animation:reelSpin 6s linear infinite}
+.reelS + .reelS{animation-direction:reverse;animation-duration:7.5s}
+@keyframes reelSpin{to{transform:rotate(360deg)}}
+/* letra de neón con mal contacto */
+.flick{animation:neonFlick 4.2s steps(1) infinite}
+@keyframes neonFlick{
+  0%,100%{opacity:1} 11%{opacity:.25} 13%{opacity:1} 47%{opacity:1} 49%{opacity:.4} 51%{opacity:1} 83%{opacity:.75}
+}
+/* parpadeo de personajes */
+.eyesN,.eyesP,.eyesP2,.eyesW{transform-box:fill-box;transform-origin:center;animation:eyeBlink 4.8s ease-in-out infinite}
+.eyesP{animation-duration:5.6s;animation-delay:-2s}
+.eyesP2{animation-duration:5.2s;animation-delay:-1.1s}
+@keyframes eyeBlink{
+  0%,92%,100%{transform:scaleY(1)}
+  95%{transform:scaleY(.08)}
+}
+/* Nicolau: ciclo de paseo caricaturesco */
+.walker .fig{transform-box:fill-box;transform-origin:50% 100%;animation:nicoSway 3.4s ease-in-out infinite}
+@keyframes nicoSway{0%,100%{transform:rotate(-.8deg)}50%{transform:rotate(.8deg)}}
+.walker.walking .fig{animation:nicoBob .34s ease-in-out infinite}
+@keyframes nicoBob{0%,100%{transform:translateY(0)}50%{transform:translateY(-3.5%)}}
+.walker .legA,.walker .legB,.walker .armA,.walker .armB{transform-box:fill-box}
+.walker .legA,.walker .legB{transform-origin:50% 2%}
+.walker .armA,.walker .armB{transform-origin:50% 6%}
+.walker.walking .legA{animation:swingA .34s ease-in-out infinite}
+.walker.walking .legB{animation:swingB .34s ease-in-out infinite}
+.walker.walking .armA{animation:swingB .34s ease-in-out infinite}
+.walker.walking .armB{animation:swingA .34s ease-in-out infinite}
+@keyframes swingA{0%,100%{transform:rotate(24deg)}50%{transform:rotate(-24deg)}}
+@keyframes swingB{0%,100%{transform:rotate(-24deg)}50%{transform:rotate(24deg)}}
+@media (prefers-reduced-motion:reduce){
+  .mote,.steam,.cursorBlk,.reelS,.flick{animation:none}
+  .eyesN,.eyesP,.eyesP2,.eyesW{animation:none}
+  .walker .fig,.walker.walking .fig{animation:none}
+  .walker.walking .legA,.walker.walking .legB,.walker.walking .armA,.walker.walking .armB{animation:none}
+}
