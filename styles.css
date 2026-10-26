@@ -254,7 +254,7 @@ kbd{background:var(--ink-3);border:1px solid var(--cyan);border-radius:4px;paddi
 }
 /* Nicolau caminante */
 .walker{position:absolute;bottom:8%;width:8.5%;left:78%;pointer-events:none;z-index:4;transition:left .6s linear}
-.walker svg{width:100%;height:auto;display:block;overflow:visible}
+#stage .walker svg{position:static;inset:auto;width:100%;height:auto;display:block;overflow:visible}
 .walker.flip svg{transform:scaleX(-1)}
 .walker.walking .fig{animation:nicoBob .32s ease-in-out infinite}
 .walker.walking .legA{animation:stepA .32s steps(1) infinite}
