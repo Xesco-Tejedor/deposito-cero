@@ -638,7 +638,9 @@ const SCENES = {
   deposito:()=>svgDeposito(!!F.missatge),
 };
 function go(scene){
-  state.scene = scene; renderScene(); AudioEngine.rain(scene==='calle'); save();
+  state.scene = scene;
+  nico.x = NICO_ENTRY[scene] ?? 50;
+  renderScene(); AudioEngine.rain(scene==='calle'); save();
 }
 function renderScene(){
   byId('stage').innerHTML = SCENES[state.scene]();
@@ -730,8 +732,16 @@ function handleHotspot(hs){
 }
 document.addEventListener('DOMContentLoaded', ()=>{
   byId('stage').addEventListener('click', e=>{
-    const hs = e.target.closest('.hs'); if(!hs) return;
-    handleHotspot(hs.dataset.hs);
+    const hs = e.target.closest('.hs');
+    const sr = byId('stage').getBoundingClientRect();
+    if(!hs){
+      const xPct = Math.max(4, Math.min(96, (e.clientX - sr.left)/sr.width*100));
+      walkTo(xPct);
+      return;
+    }
+    const r = hs.getBoundingClientRect();
+    const xPct = Math.max(4, Math.min(96, (r.left + r.width/2 - sr.left)/sr.width*100));
+    walkTo(xPct, ()=>handleHotspot(hs.dataset.hs));
   });
   byId('stage').addEventListener('pointerover', e=>{
     const hs = e.target.closest('.hs');
@@ -921,8 +931,56 @@ function tagLabels(){
 }
 const _renderScene = renderScene;
 renderScene = function(){
-  _renderScene(); tagLabels();
+  _renderScene(); tagLabels(); renderWalker();
 };
+
+/* ============================ NICOLAU CAMINANTE ============================ */
+function svgNicolauWalk(){
+return `<svg viewBox="0 0 100 210">
+<g class="fig">
+  <g class="legB"><rect x="56" y="150" width="12" height="52" rx="5" fill="#14121c"/><rect x="52" y="196" width="20" height="10" rx="4" fill="#0d0c13"/></g>
+  <g class="legA"><rect x="34" y="150" width="12" height="52" rx="5" fill="#14121c"/><rect x="30" y="196" width="20" height="10" rx="4" fill="#0d0c13"/></g>
+  <path d="M 28 78 Q 50 66 72 78 L 78 158 Q 50 172 22 158 Z" fill="#1d1a28" stroke="#2de2ff" stroke-opacity=".28" stroke-width="2"/>
+  <path d="M 28 82 Q 16 108 24 136" fill="none" stroke="#1d1a28" stroke-width="10" stroke-linecap="round"/>
+  <path d="M 72 82 Q 84 108 76 136" fill="none" stroke="#1d1a28" stroke-width="10" stroke-linecap="round"/>
+  <polygon points="38,80 62,80 50,104" fill="#ff2e88"/>
+  <path d="M 60 82 L 74 120 L 66 124 L 56 88 Z" fill="#d11e6e"/>
+  <circle cx="50" cy="52" r="24" fill="#c9a06a"/>
+  <path d="M 27 46 Q 50 22 73 46 L 73 38 Q 50 12 27 38 Z" fill="#171420"/>
+  <circle cx="41" cy="54" r="7" fill="none" stroke="#0d0c13" stroke-width="2.6"/>
+  <circle cx="59" cy="54" r="7" fill="none" stroke="#0d0c13" stroke-width="2.6"/>
+  <line x1="48" y1="54" x2="52" y2="54" stroke="#0d0c13" stroke-width="2.6"/>
+</g>
+</svg>`;
+}
+const NICO_ENTRY = { taller:84, calle:8, tienda:58, deposito:50 };
+const nico = { x:78 };
+function renderWalker(){
+  const stage = byId('stage');
+  let w = byId('nico');
+  if(!w){
+    w = document.createElement('div');
+    w.id = 'nico'; w.className = 'walker';
+    w.innerHTML = svgNicolauWalk();
+    stage.appendChild(w);
+  }
+  w.style.transitionDuration = '0s';
+  w.style.left = nico.x + '%';
+}
+function walkTo(xPct, done){
+  const w = byId('nico');
+  if(!w){ done && done(); return; }
+  const dist = Math.abs(xPct - nico.x);
+  if(dist < 1){ done && done(); return; }
+  w.classList.toggle('flip', xPct < nico.x);
+  const dur = Math.min(1.4, .3 + dist * .014);
+  w.style.transitionDuration = dur + 's';
+  w.classList.add('walking');
+  nico.x = xPct;
+  w.style.left = xPct + '%';
+  clearTimeout(w._wtm);
+  w._wtm = setTimeout(()=>{ w.classList.remove('walking'); done && done(); }, dur*1000+50);
+}
 
 /* ============================ VOLCADO ============================ */
 function runDump(){
