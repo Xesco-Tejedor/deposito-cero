@@ -1189,6 +1189,7 @@ function finishType(){
   clearInterval(dlg._tm); dlg.typing=false;
   byId('dialog-text').textContent = dlg.full;
   const L = dlg.lines[dlg.i];
+  if(!L) return;
   if(L.choices){
     const box = byId('dialog-choices'); box.innerHTML='';
     byId('dialog-next').style.display='none';
@@ -1197,8 +1198,9 @@ function finishType(){
       b.className='deco-btn'; b.type='button'; b.textContent=c.text;
       b.addEventListener('click', ev=>{
         ev.stopPropagation(); AudioEngine.click();
+        const before = dlg.lines;
         if(c.action) c.action();
-        if(c.goto==='end'){ closeDialog(); }
+        if(c.goto==='end'){ if(dlg.lines===before) closeDialog(); }
         else if(typeof c.goto==='number'){ dlg.i=c.goto; showLine(); }
       });
       box.appendChild(b);
@@ -1215,6 +1217,7 @@ function advanceDialog(){
   else showLine();
 }
 function closeDialog(){
+  clearInterval(dlg._tm); dlg.typing=false;
   byId('dialog').hidden = true;
   const cb = dlg.onDone; dlg.onDone=null; dlg.lines=[];
   renderObjective(); save();
