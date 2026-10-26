@@ -1135,6 +1135,10 @@ document.addEventListener('DOMContentLoaded', ()=>{
   byId('btn-ending-restart').addEventListener('click', ()=>{ location.reload(); });
   byId('btn-start').addEventListener('click', ()=>{
     AudioEngine.init();
+    wipe();
+    state.scene='taller'; state.inventory=[]; state.selItem=null;
+    Object.keys(F).forEach(k=>delete F[k]);
+    renderInventory();
     byId('title-screen').hidden = true;
     go('taller');
   });
