@@ -568,7 +568,7 @@ function renderWalker(){
     stage.appendChild(w);
   }
   w.classList.remove('at-table');
-  const scale = {taller:62.5,calle:44,tienda:62.5,deposito:62.5};
+  const scale = {taller:62.5,calle:44,tienda:74,deposito:62.5};
   w.style.height = (scale[state.scene] || 62.5) + '%';
   w.style.transitionDuration = '0s';
   w.style.left = nico.x + '%';
@@ -771,9 +771,10 @@ document.addEventListener('DOMContentLoaded', ()=>{
 
 /* Apertura narrativa. No modifica el estado ni las soluciones. */
 const NoirIntro={timer:null,index:0,full:'EXPEDIENTE: DEPÓSITO CERO\n\nUna cinta de 1987. Ningún catálogo la recuerda.\n\nNicolau dedica sus noches a preservar software de 8 bits: leer lo que queda, documentarlo y evitar que desaparezca.\n\nEsta mañana, alguien dejó un paquete en su puerta. Sin remitente. Dentro, una cinta dañada y una nota.\n\nEl título: «El Priorato de la Culpa».\n\nQuien la envía conoce su método de trabajo demasiado bien.\n\nAhora, en el taller, espera una máquina capaz de devolverle la voz.\n\nEl caso empieza con un mensaje en el contestador.',
- open(){this.index=0;byId('intro-overlay').hidden=false;byId('intro-typed').textContent='';byId('intro-enter').hidden=true;byId('intro-skip').focus();if(matchMedia('(prefers-reduced-motion: reduce)').matches)this.complete();else this.tick();},
- tick(){if(byId('intro-overlay').hidden)return;byId('intro-typed').textContent=this.full.slice(0,++this.index);if(this.index>=this.full.length){this.complete();return;}this.timer=setTimeout(()=>this.tick(),this.full[this.index-1]==='\n'?180:32);},
- complete(){clearTimeout(this.timer);this.index=this.full.length;byId('intro-typed').textContent=this.full;byId('intro-enter').hidden=false;},
+ open(){this.index=0;byId('intro-overlay').hidden=false;byId('intro-typed').textContent='';byId('intro-crawl').classList.add('is-crawling');byId('intro-crawl').scrollTop=0;byId('intro-enter').hidden=true;byId('intro-skip').focus();if(matchMedia('(prefers-reduced-motion: reduce)').matches)this.complete();else this.tick();},
+ tick(){if(byId('intro-overlay').hidden)return;byId('intro-typed').textContent=this.full.slice(0,++this.index);this.follow();if(this.index>=this.full.length){clearTimeout(this.timer);byId('intro-enter').hidden=false;return;}this.timer=setTimeout(()=>this.tick(),this.full[this.index-1]==='\n'?180:32);},
+ follow(){const v=byId('intro-crawl');v.scrollTop=Math.max(0,v.scrollHeight-v.clientHeight/2);},
+ complete(){clearTimeout(this.timer);this.index=this.full.length;byId('intro-crawl').classList.remove('is-crawling');byId('intro-typed').textContent=this.full;byId('intro-enter').hidden=false;},
  close(){clearTimeout(this.timer);byId('intro-overlay').hidden=true;byId('btn-guide').focus();}
 };
 document.addEventListener('DOMContentLoaded',()=>{
