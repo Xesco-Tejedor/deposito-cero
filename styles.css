@@ -357,3 +357,9 @@ kbd{background:var(--ink-3);border:1px solid var(--cyan);border-radius:4px;paddi
 .walker.at-table .nico-front{display:none}
 .walker.at-table .nico-back{display:block}
 @media(prefers-reduced-motion:reduce){.walker.walking .armA,.walker.walking .armB{animation:none;transform:rotate(0deg)}}
+
+/* Intro v14: la maquina escribe desde el centro y el texto sube hasta desaparecer por arriba */
+.intro-report .crawl{--crawl-h:340px;position:relative}
+.intro-report .crawl.is-crawling{height:var(--crawl-h);overflow:hidden;-webkit-mask-image:linear-gradient(to bottom,transparent 0,#000 22%,#000 100%);mask-image:linear-gradient(to bottom,transparent 0,#000 22%,#000 100%)}
+.intro-report .crawl.is-crawling pre{min-height:0;padding:calc(var(--crawl-h) / 2) 0}
+@media(max-width:700px){.intro-report .crawl{--crawl-h:260px}}
