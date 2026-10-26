@@ -428,15 +428,15 @@ return `<svg viewBox="0 0 1600 900" preserveAspectRatio="xMidYMid slice">
 </g>
 <!-- HOTSPOTS -->
 <g id="hotspots">
-  <rect class="hs hs-pulse" data-hs="contestador" x="806" y="530" width="180" height="150"/>
+  <rect class="hs hs-pulse" data-hs="contestador" x="806" y="530" width="174" height="150"/>
   <rect class="hs hs-pulse" data-hs="estanteria"  x="458"  y="300" width="314" height="355"/>
-  <rect class="hs hs-pulse" data-hs="libreta"     x="1140" y="496" width="104" height="76"/>
+  <rect class="hs hs-pulse" data-hs="libreta"     x="1146" y="496" width="98" height="76"/>
   <rect class="hs hs-pulse" data-hs="osciloscopio" x="980"  y="458" width="166" height="120"/>
-  <rect class="hs hs-pulse" data-hs="crt"          x="1168" y="412" width="218" height="168"/>
+  <rect class="hs hs-pulse" data-hs="crt"          x="1180" y="416" width="180" height="70"/>
   <rect class="hs hs-pulse" data-hs="cinta"        x="1244" y="488" width="126" height="86"/>
   <rect class="hs hs-pulse" data-hs="cajon"        x="1032" y="590" width="186" height="168"/>
   <rect class="hs hs-pulse" data-hs="spectrum"     x="1328" y="592" width="236" height="100"/>
-  <rect class="hs hs-pulse" data-hs="puerta"       x="1436" y="258" width="180" height="520"/>
+  <rect class="hs hs-pulse" data-hs="puerta"       x="1436" y="258" width="180" height="330"/>
 </g>
 </svg>`;
 }
