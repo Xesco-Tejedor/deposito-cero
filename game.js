@@ -137,428 +137,940 @@ function svgTaller(){
 return `<svg viewBox="0 0 1600 900" preserveAspectRatio="xMidYMid slice">
 <defs>
   <linearGradient id="wallG" x1="0" y1="0" x2="0" y2="1">
-    <stop offset="0" stop-color="#15151f"/><stop offset="1" stop-color="#0f0f17"/>
+    <stop offset="0" stop-color="#232035"/><stop offset=".7" stop-color="#191624"/><stop offset="1" stop-color="#141120"/>
   </linearGradient>
   <linearGradient id="floorG" x1="0" y1="0" x2="0" y2="1">
-    <stop offset="0" stop-color="#17141f"/><stop offset="1" stop-color="#0c0a11"/>
+    <stop offset="0" stop-color="#2b1f2a"/><stop offset="1" stop-color="#120d14"/>
   </linearGradient>
   <linearGradient id="night" x1="0" y1="0" x2="0" y2="1">
-    <stop offset="0" stop-color="#141c2e"/><stop offset="1" stop-color="#0a1220"/>
+    <stop offset="0" stop-color="#1c2a48"/><stop offset=".6" stop-color="#101a30"/><stop offset="1" stop-color="#0a1220"/>
   </linearGradient>
   <linearGradient id="posterSun" x1="0" y1="0" x2="0" y2="1">
     <stop offset="0" stop-color="#ffd76a"/><stop offset=".5" stop-color="#ff2e88"/><stop offset="1" stop-color="#8a4bff"/>
   </linearGradient>
+  <linearGradient id="lampCone" x1="0" y1="0" x2="0" y2="1">
+    <stop offset="0" stop-color="#e8a33d" stop-opacity=".28"/><stop offset="1" stop-color="#e8a33d" stop-opacity="0"/>
+  </linearGradient>
+  <linearGradient id="woodT" x1="0" y1="0" x2="0" y2="1">
+    <stop offset="0" stop-color="#4a3244"/><stop offset="1" stop-color="#31222f"/>
+  </linearGradient>
+  <radialGradient id="moonG" cx=".5" cy=".5" r=".5">
+    <stop offset="0" stop-color="#f4ead2"/><stop offset=".8" stop-color="#d9cbaa"/><stop offset="1" stop-color="#d9cbaa" stop-opacity="0"/>
+  </radialGradient>
   ${NEON_DEFS}
 </defs>
 <rect width="1600" height="900" fill="#0b0b10"/>
-<rect width="1600" height="640" fill="url(#wallG)"/>
-<polygon points="0,640 1600,640 1600,900 0,900" fill="url(#floorG)"/>
-<g stroke="#1d1d2e" stroke-width="3" opacity=".8">
-  ${Array.from({length:9},(_,i)=>`<line x1="0" y1="${668+i*28}" x2="1600" y2="${668+i*28}"/>`).join('')}
+<rect width="1600" height="600" fill="url(#wallG)"/>
+<rect y="560" width="1600" height="10" fill="#0e0c16"/>
+<rect y="570" width="1600" height="30" fill="#1c1826" stroke="#0a0a12" stroke-width="3"/>
+<g stroke="#100d1a" stroke-width="2" opacity=".6">
+  ${Array.from({length:24},(_,i)=>`<line x1="${i*70}" y1="572" x2="${i*70+24}" y2="598"/>`).join('')}
 </g>
-<!-- ventana con persiana: la ciudad de noche -->
+<polygon points="0,600 1600,600 1600,900 0,900" fill="url(#floorG)"/>
+<g stroke="#0d0a10" stroke-width="4" opacity=".85">
+  ${Array.from({length:11},(_,i)=>`<line x1="0" y1="${628+i*30}" x2="1600" y2="${636+i*30}"/>`).join('')}
+</g>
+<g stroke="#3a2a38" stroke-width="2" opacity=".5">
+  ${Array.from({length:11},(_,i)=>`<line x1="0" y1="${630+i*30}" x2="1600" y2="${638+i*30}"/>`).join('')}
+</g>
+<!-- puerta del archivo -->
 <g>
-  <rect x="120" y="150" width="310" height="390" fill="url(#night)" stroke="#06060a" stroke-width="10"/>
+  <rect x="1440" y="264" width="170" height="510" fill="#0d0b14" stroke="#0a0a12" stroke-width="6"/>
+  <rect x="1456" y="280" width="138" height="478" rx="4" fill="#241d31" stroke="#0a0a12" stroke-width="5"/>
+  <rect x="1472" y="300" width="106" height="180" rx="3" fill="#2b2238" stroke="#0a0a12" stroke-width="4"/>
+  <rect x="1484" y="314" width="82" height="152" rx="2" fill="#151020"/>
+  <rect x="1484" y="314" width="82" height="152" rx="2" fill="#e8a33d" opacity=".12"/>
+  <rect x="1472" y="508" width="106" height="210" rx="3" fill="#2b2238" stroke="#0a0a12" stroke-width="4"/>
+  <rect x="1472" y="508" width="106" height="210" rx="3" fill="#0a0a12" opacity=".25"/>
+  <circle cx="1572" cy="520" r="9" fill="#e8a33d" stroke="#0a0a12" stroke-width="3"/>
+  <rect x="1456" y="758" width="138" height="8" fill="#e8a33d" opacity=".55"/>
+</g>
+<!-- percha con gabardina -->
+<g>
+  <line x1="1408" y1="290" x2="1408" y2="310" stroke="#0a0a12" stroke-width="6" stroke-linecap="round"/>
+  <path d="M 1408 310 q -14 4 -16 22 l -6 190 q 0 16 16 16 l 12 0 q 14 0 14 -16 l -6 -190 q -2 -18 -16 -22 Z" fill="#1d212e" stroke="#0a0a12" stroke-width="4" stroke-linejoin="round"/>
+  <path d="M 1388 300 q 20 -22 40 0 q -6 8 -20 8 q -14 0 -20 -8 Z" fill="#171a26" stroke="#0a0a12" stroke-width="4"/>
+</g>
+<!-- ventana con persiana -->
+<g>
+  <rect x="96" y="116" width="340" height="420" fill="#0d0b14" stroke="#0a0a12" stroke-width="6"/>
+  <rect x="112" y="132" width="308" height="388" fill="url(#night)" stroke="#0a0a12" stroke-width="4"/>
+  <circle cx="356" cy="196" r="30" fill="url(#moonG)" opacity=".95"/>
   <g fill="#0a0e18">
-    <rect x="150" y="330" width="60" height="210"/><rect x="220" y="280" width="46" height="260"/>
-    <rect x="276" y="350" width="70" height="190"/><rect x="356" y="300" width="50" height="240"/>
+    <rect x="120" y="330" width="70" height="190"/><rect x="198" y="280" width="52" height="240"/>
+    <rect x="258" y="350" width="78" height="170"/><rect x="344" y="300" width="60" height="220"/>
   </g>
-  <g fill="#2de2ff" opacity=".55">
-    ${Array.from({length:14},(_,i)=>`<rect x="${158+(i*53)%250}" y="${300+(i*71)%220}" width="6" height="9"/>`).join('')}
+  <g fill="#2de2ff" opacity=".65">
+    ${Array.from({length:12},(_,i)=>`<rect x="${128+(i*53)%260}" y="${300+(i*71)%200}" width="7" height="10" rx="1"/>`).join('')}
   </g>
-  <g fill="#ff2e88" opacity=".55">
-    ${Array.from({length:8},(_,i)=>`<rect x="${176+(i*67)%230}" y="${320+(i*97)%200}" width="6" height="9"/>`).join('')}
+  <g fill="#ffd76a" opacity=".7">
+    ${Array.from({length:8},(_,i)=>`<rect x="${140+(i*67)%240}" y="${316+(i*97)%180}" width="7" height="10" rx="1"/>`).join('')}
   </g>
-  <g stroke="#06060a" stroke-width="9">
-    ${Array.from({length:12},(_,i)=>`<line x1="126" y1="${186+i*29}" x2="424" y2="${186+i*29}"/>`).join('')}
+  <g fill="#ff2e88" opacity=".6">
+    ${Array.from({length:5},(_,i)=>`<rect x="${156+(i*83)%220}" y="${330+(i*59)%170}" width="7" height="10" rx="1"/>`).join('')}
   </g>
-  <rect x="120" y="150" width="310" height="26" fill="#06060a"/>
-  <g fill="#e8a33d" opacity=".09">
-    <polygon points="180,560 240,560 420,900 320,900"/>
-    <polygon points="260,560 320,560 540,900 440,900"/>
-    <polygon points="340,560 400,560 660,900 560,900"/>
+  <g>
+    <rect x="112" y="132" width="308" height="150" fill="#262b3a" stroke="#0a0a12" stroke-width="4"/>
+    <g stroke="#141826" stroke-width="4">
+      ${Array.from({length:9},(_,i)=>`<line x1="116" y1="${146+i*15}" x2="416" y2="${146+i*15}"/>`).join('')}
+    </g>
+    <rect x="112" y="276" width="308" height="12" fill="#1a1e2c" stroke="#0a0a12" stroke-width="3"/>
+    <line x1="266" y1="288" x2="266" y2="340" stroke="#c9bda3" stroke-width="3"/>
+    <circle cx="266" cy="346" r="6" fill="#c9bda3" stroke="#0a0a12" stroke-width="2.4"/>
+  </g>
+  <rect x="262" y="132" width="8" height="388" fill="#0d0b14"/>
+  <rect x="96" y="528" width="340" height="18" fill="#1c1826" stroke="#0a0a12" stroke-width="4"/>
+  <path d="M 96 110 q 30 130 6 250 q -12 90 8 186 l -34 0 q -14 -220 4 -436 Z" fill="#3a1f3a" stroke="#0a0a12" stroke-width="4" stroke-linejoin="round"/>
+  <g fill="#e8a33d" opacity=".10">
+    <polygon points="150,546 190,546 400,900 330,900"/>
+    <polygon points="230,546 270,546 520,900 450,900"/>
+    <polygon points="310,546 350,546 640,900 570,900"/>
   </g>
 </g>
-<!-- póster retrowave -->
-<g>
-  <rect x="520" y="180" width="240" height="300" fill="#0b0b10" stroke="#2de2ff" stroke-width="3" opacity=".95"/>
-  <circle cx="640" cy="330" r="86" fill="url(#posterSun)"/>
-  <g fill="#0b0b10">
-    ${Array.from({length:5},(_,i)=>`<rect x="548" y="${352+i*14}" width="184" height="${3+i*3}"/>`).join('')}
+<!-- poster retrowave -->
+<g transform="rotate(-1.2 620 220)">
+  <rect x="500" y="140" width="250" height="170" fill="#0b0b10" stroke="#0a0a12" stroke-width="6"/>
+  <rect x="508" y="148" width="234" height="154" fill="#141026" stroke="#2de2ff" stroke-width="2" opacity=".95"/>
+  <circle cx="625" cy="216" r="52" fill="url(#posterSun)"/>
+  <g fill="#141026">
+    ${Array.from({length:4},(_,i)=>`<rect x="569" y="${224+i*11}" width="112" height="${2+i*2.4}"/>`).join('')}
   </g>
-  <polygon points="560,430 610,370 660,430" fill="#1d1030" stroke="#ff2e88" stroke-width="2"/>
-  <polygon points="630,430 690,360 740,430" fill="#170c26" stroke="#2de2ff" stroke-width="2"/>
-  <text x="640" y="466" fill="#2de2ff" font-size="16" letter-spacing="5" text-anchor="middle" filter="url(#neonC)">MAÑANA ES 1987</text>
+  <polygon points="530,292 580,240 628,292" fill="#1d1030" stroke="#ff2e88" stroke-width="2"/>
+  <polygon points="596,292 654,232 716,292" fill="#170c26" stroke="#2de2ff" stroke-width="2"/>
+  <text x="625" y="172" fill="#2de2ff" font-size="15" letter-spacing="4" text-anchor="middle" filter="url(#neonC)">MAÑANA ES 1987</text>
+  <rect x="512" y="132" width="34" height="14" fill="#c9bda3" opacity=".8" transform="rotate(-40 529 139)"/>
+  <rect x="704" y="132" width="34" height="14" fill="#c9bda3" opacity=".8" transform="rotate(40 721 139)"/>
 </g>
-<!-- lámpara colgante cálida -->
-<g>
-  <line x1="900" y1="0" x2="900" y2="130" stroke="#26262e" stroke-width="5"/>
-  <path d="M 852 170 L 948 170 L 922 130 L 878 130 Z" fill="#1d1d2e" stroke="#3a3a4a" stroke-width="3"/>
-  <ellipse cx="900" cy="176" rx="26" ry="8" fill="#ffd76a"/>
-  <polygon points="874,178 926,178 1010,640 790,640" fill="#e8a33d" opacity=".07"/>
+<!-- corcho de investigacion -->
+<g transform="rotate(1 880 260)">
+  <rect x="782" y="152" width="200" height="226" rx="4" fill="#4a3428" stroke="#0a0a12" stroke-width="6"/>
+  <rect x="792" y="162" width="180" height="206" fill="#6b4c38"/>
+  <g transform="rotate(-4 830 220)"><rect x="806" y="190" width="52" height="60" fill="#c9c9c9" stroke="#0a0a12" stroke-width="2.6"/><rect x="812" y="196" width="40" height="40" fill="#3a3a44"/><circle cx="832" cy="184" r="5" fill="#ff5a4e" stroke="#0a0a12" stroke-width="2"/></g>
+  <g transform="rotate(3 930 230)"><rect x="904" y="200" width="52" height="60" fill="#c9c9c9" stroke="#0a0a12" stroke-width="2.6"/><rect x="910" y="206" width="40" height="40" fill="#2b3a44"/><circle cx="930" cy="194" r="5" fill="#2de2ff" stroke="#0a0a12" stroke-width="2"/></g>
+  <g transform="rotate(-2 870 320)"><rect x="838" y="288" width="66" height="46" fill="#efe6cc" stroke="#0a0a12" stroke-width="2.4"/>
+    ${Array.from({length:4},(_,i)=>`<line x1="846" y1="${298+i*9}" x2="896" y2="${298+i*9}" stroke="#7a6f57" stroke-width="1.8"/>`).join('')}
+    <circle cx="872" cy="284" r="5" fill="#ffd76a" stroke="#0a0a12" stroke-width="2"/></g>
+  <g transform="rotate(5 940 320)"><rect x="914" y="292" width="48" height="58" fill="#d8cba8" stroke="#0a0a12" stroke-width="2.4"/>
+    ${Array.from({length:5},(_,i)=>`<line x1="920" y1="${302+i*10}" x2="956" y2="${302+i*10}" stroke="#5e534a" stroke-width="1.6"/>`).join('')}
+    <circle cx="938" cy="288" r="5" fill="#ff2e88" stroke="#0a0a12" stroke-width="2"/></g>
+  <path d="M 832 184 L 872 284 L 930 194 L 938 288 L 832 184" fill="none" stroke="#d33" stroke-width="2.2" opacity=".85"/>
 </g>
-<!-- estantería de cintas con tira de neón -->
+<!-- reloj -->
 <g>
-  <rect x="470" y="300" width="290" height="330" fill="#12121c" stroke="#26262e" stroke-width="6"/>
-  <rect x="470" y="296" width="290" height="6" fill="#2de2ff" filter="url(#neonC)" opacity=".9"/>
-  ${[0,1,2,3].map(r=>`<rect x="478" y="${368+r*66}" width="274" height="8" fill="#26262e"/>`).join('')}
-  ${Array.from({length:4},(_,r)=>Array.from({length:11},(_,c)=>{
-    const h=44+((r*11+c)%3)*8, w=16+((r*7+c)%3)*4, x=484+c*24, y=368+r*66-h;
-    const col=['#7a5c33','#6b3a4a','#3a4a5e','#4a3a6b','#5e6840'][(r+c)%5];
-    return `<rect x="${x}" y="${y}" width="${w}" height="${h}" fill="${col}" stroke="#0b0b10"/>`;
+  <circle cx="1030" cy="212" r="38" fill="#efe6cc" stroke="#0a0a12" stroke-width="6"/>
+  <circle cx="1030" cy="212" r="4" fill="#0a0a12"/>
+  <line x1="1030" y1="212" x2="1030" y2="188" stroke="#0a0a12" stroke-width="4" stroke-linecap="round"/>
+  <line x1="1030" y1="212" x2="1048" y2="222" stroke="#0a0a12" stroke-width="4" stroke-linecap="round"/>
+  <g><line x1="1030" y1="212" x2="1030" y2="182" stroke="#ff2e88" stroke-width="2.4" stroke-linecap="round"/><animateTransform attributeName="transform" type="rotate" from="0 1030 212" to="360 1030 212" dur="60s" repeatCount="indefinite"/></g>
+</g>
+<!-- calendario -->
+<g transform="rotate(2 1330 240)">
+  <rect x="1296" y="196" width="74" height="92" fill="#efe6cc" stroke="#0a0a12" stroke-width="4"/>
+  <rect x="1296" y="196" width="74" height="22" fill="#ff2e88" stroke="#0a0a12" stroke-width="3"/>
+  <text x="1333" y="212" fill="#efe6cc" font-size="13" letter-spacing="2" text-anchor="middle" font-weight="700">OCT</text>
+  <text x="1333" y="248" fill="#14111c" font-size="13" text-anchor="middle" font-weight="700">1987</text>
+  <g stroke="#b9b4a4" stroke-width="1.6">
+    ${Array.from({length:3},(_,i)=>`<line x1="1304" y1="${258+i*10}" x2="1362" y2="${258+i*10}"/>`).join('')}
+  </g>
+  <circle cx="1346" cy="268" r="8" fill="none" stroke="#d33" stroke-width="2.6"/>
+</g>
+<!-- estanteria de cintas -->
+<g>
+  <rect x="462" y="318" width="306" height="332" fill="#241a20" stroke="#0a0a12" stroke-width="7"/>
+  <rect x="474" y="330" width="282" height="308" fill="#171019"/>
+  ${[0,1,2,3].map(r=>`<rect x="474" y="${438+r*52}" width="282" height="12" fill="#3a2a2e" stroke="#0a0a12" stroke-width="2.6"/>`).join('')}
+  ${Array.from({length:4},(_,r)=>Array.from({length:12},(_,c)=>{
+    const h=36+((r*13+c*7)%4)*7, w=17+((r*5+c)%3)*4, x=480+c*23, y=438+r*52-h;
+    const col=['#8a5c33','#7a3a4a','#3a5a7e','#5a3a7b','#5e6840','#a8722e'][(r*3+c)%6];
+    const lean=(r===1&&c===9)?' transform="rotate(9 '+(x+w/2)+' '+(y+h)+')"':'';
+    return `<rect x="${x}" y="${y}" width="${w}" height="${h}" rx="2" fill="${col}" stroke="#0a0a12" stroke-width="2.4"${lean}/>`;
   }).join('')).join('')}
-  <text x="615" y="330" fill="#ff2e88" font-size="17" letter-spacing="4" text-anchor="middle" filter="url(#neonP)">ARXIU · 1983-1992</text>
-</g>
-<!-- mesa auxiliar con el Spectrum -->
-<g>
-  <rect x="1330" y="668" width="230" height="20" fill="#26202e"/>
-  <rect x="1350" y="688" width="14" height="120" fill="#17141f"/>
-  <rect x="1526" y="688" width="14" height="120" fill="#17141f"/>
-  <polygon points="1352,640 1538,640 1550,668 1340,668" fill="#23232a" stroke="#3a3a44" stroke-width="3"/>
-  <rect x="1358" y="646" width="160" height="14" rx="3" fill="#15151a"/>
-  ${Array.from({length:16},(_,i)=>`<rect x="${1362+i*10}" y="648" width="7" height="10" fill="#c9bda3" opacity=".5"/>`).join('')}
-  <text x="1445" y="630" fill="#2de2ff" font-size="14" letter-spacing="3" text-anchor="middle" opacity=".8">ZX · 48K</text>
-</g>
-<!-- escritorio -->
-<g>
-  <rect x="980" y="560" width="420" height="26" fill="#2b2333"/>
-  <rect x="980" y="586" width="420" height="10" fill="#1c1722"/>
-  <rect x="1000" y="596" width="16" height="212" fill="#1c1722"/>
-  <rect x="1340" y="596" width="16" height="212" fill="#1c1722"/>
-  <rect x="1040" y="596" width="170" height="150" fill="#211a29" stroke="#33293d" stroke-width="4"/>
-  <rect x="1052" y="610" width="146" height="56" fill="#1a1520" stroke="#33293d" stroke-width="3"/>
-  <rect x="1052" y="676" width="146" height="56" fill="#1a1520" stroke="#33293d" stroke-width="3"/>
-  <rect x="1105" y="634" width="40" height="6" fill="#2de2ff" opacity=".7"/>
-  <rect x="1105" y="700" width="40" height="6" fill="#2de2ff" opacity=".7"/>
-  <!-- CRT fósforo -->
-  <rect x="1180" y="428" width="192" height="142" rx="8" fill="#221c2b" stroke="#3a3044" stroke-width="5"/>
-  <rect x="1198" y="446" width="156" height="106" rx="4" fill="#0a140d"/>
-  <rect x="1198" y="446" width="156" height="106" rx="4" fill="#59d98c" opacity=".08"/>
-  ${Array.from({length:6},(_,i)=>`<line x1="1200" y1="${452+i*17}" x2="1352" y2="${452+i*17}" stroke="#59d98c" stroke-opacity="${i%2?0.14:0.05}"/>`).join('')}
-  <text x="1208" y="470" fill="#59d98c" font-size="13" font-family="monospace" opacity=".9">READY.</text>
-  <rect x="1240" y="570" width="70" height="12" fill="#221c2b"/>
-  <polygon points="1150,596 1330,596 1342,616 1138,616" fill="#23232a" stroke="#3a3a44" stroke-width="2"/>
-  <!-- osciloscopio -->
-  <rect x="988" y="468" width="150" height="102" rx="6" fill="#17131f" stroke="#33293d" stroke-width="4"/>
-  <rect x="1000" y="480" width="126" height="58" rx="3" fill="#050d08"/>
-  <path d="M 1004 510 q 10 -18 20 0 t 20 0 t 20 0 t 20 0 t 20 0 t 20 0" fill="none" stroke="#59d98c" stroke-width="2.4"/>
-  <circle cx="1008" cy="552" r="5" fill="#ff2e88"/>
-  <circle cx="1026" cy="552" r="5" fill="#3a3044"/>
-  <text x="1063" y="558" fill="#c9bda3" font-size="11" text-anchor="middle" opacity=".8">MOD-R1</text>
-  <!-- libreta -->
-  <g transform="translate(1150,512) rotate(-4)">
-    <rect width="86" height="46" rx="3" fill="#c9bda3"/>
-    ${Array.from({length:5},(_,i)=>`<line x1="8" y1="${10+i*8}" x2="78" y2="${10+i*8}" stroke="#7a6f57" stroke-width="1.6"/>`).join('')}
-    <rect x="0" y="0" width="10" height="46" fill="#8f8266"/>
+  <rect x="462" y="310" width="306" height="12" fill="#3a2a2e" stroke="#0a0a12" stroke-width="4"/>
+  <rect x="470" y="306" width="290" height="6" fill="#2de2ff" filter="url(#neonC)" opacity=".9"/>
+  <text x="617" y="344" fill="#ff9ec7" font-size="16" letter-spacing="4" text-anchor="middle">ARXIU · 1983-1992</text>
+  <g transform="rotate(-2 720 288)">
+    <rect x="676" y="266" width="88" height="42" fill="#6b5a3a" stroke="#0a0a12" stroke-width="4"/>
+    <rect x="706" y="278" width="28" height="14" fill="#efe6cc" stroke="#0a0a12" stroke-width="2"/>
+    <text x="720" y="289" fill="#14111c" font-size="9" text-anchor="middle">1987</text>
   </g>
-  <!-- la cinta -->
-  <g transform="translate(1252,498)">
-    <rect width="104" height="64" rx="6" fill="#d8cba8" stroke="#8f8266" stroke-width="3"/>
-    <rect x="12" y="10" width="80" height="26" rx="3" fill="#0b0b10"/>
-    <circle cx="34" cy="23" r="9" fill="none" stroke="#d8cba8" stroke-width="3"/>
-    <circle cx="70" cy="23" r="9" fill="none" stroke="#d8cba8" stroke-width="3"/>
-    <path d="M 8 46 L 96 46 L 88 62 L 16 62 Z" fill="#0b0b10" opacity=".85"/>
-    <text x="52" y="59" fill="#d8cba8" font-size="10" text-anchor="middle" letter-spacing="1">EL PRIORATO</text>
+</g>
+<!-- lampara colgante -->
+<g>
+  <line x1="900" y1="0" x2="900" y2="126" stroke="#0a0a12" stroke-width="6"/>
+  <path d="M 848 176 Q 900 110 952 176 L 940 190 Q 900 150 860 190 Z" fill="#2b3a5e" stroke="#0a0a12" stroke-width="5" stroke-linejoin="round"/>
+  <ellipse cx="900" cy="182" rx="30" ry="10" fill="#ffd76a" stroke="#0a0a12" stroke-width="3"/>
+  <line x1="946" y1="186" x2="958" y2="232" stroke="#c9bda3" stroke-width="2.6"/>
+  <circle cx="960" cy="238" r="6" fill="#e8a33d" stroke="#0a0a12" stroke-width="2.4"/>
+  <polygon points="862,192 938,192 1080,760 720,760" fill="url(#lampCone)"/>
+  <g fill="#ffd76a">
+    <circle class="mote m1" cx="880" cy="330" r="3"/>
+    <circle class="mote m2" cx="930" cy="420" r="2.4"/>
+    <circle class="mote m3" cx="895" cy="510" r="2.8"/>
+    <circle class="mote m4" cx="950" cy="600" r="2.2"/>
   </g>
+</g>
+<!-- alfombra -->
+<g>
+  <polygon points="930,690 1470,690 1520,870 880,870" fill="#3a1f2e" stroke="#0a0a12" stroke-width="5"/>
+  <polygon points="960,712 1440,712 1478,848 922,848" fill="none" stroke="#e8a33d" stroke-width="3" opacity=".45"/>
+  <polygon points="990,732 1410,732 1440,830 960,830" fill="none" stroke="#ff2e88" stroke-width="2" opacity=".3"/>
+</g>
+<!-- maceta con ficus -->
+<g>
+  <path d="M 796 700 L 848 700 L 840 772 L 804 772 Z" fill="#7a3a2e" stroke="#0a0a12" stroke-width="4" stroke-linejoin="round"/>
+  <path d="M 822 700 q -6 -40 -26 -58 M 822 700 q 4 -46 24 -64 M 822 700 q 0 -34 2 -52" fill="none" stroke="#0a0a12" stroke-width="4" stroke-linecap="round"/>
+  <circle cx="794" cy="636" r="22" fill="#2e5e3a" stroke="#0a0a12" stroke-width="3.4"/>
+  <circle cx="848" cy="630" r="24" fill="#35704a" stroke="#0a0a12" stroke-width="3.4"/>
+  <circle cx="822" cy="612" r="26" fill="#2e5e3a" stroke="#0a0a12" stroke-width="3.4"/>
 </g>
 <!-- mesita con el contestador -->
 <g>
-  <rect x="822" y="600" width="150" height="14" fill="#26202e"/>
-  <rect x="838" y="614" width="12" height="130" fill="#17141f"/>
-  <rect x="944" y="614" width="12" height="130" fill="#17141f"/>
+  <rect x="812" y="600" width="160" height="16" fill="#3a2a2e" stroke="#0a0a12" stroke-width="4"/>
+  <rect x="826" y="616" width="14" height="128" fill="#241a20" stroke="#0a0a12" stroke-width="3"/>
+  <rect x="944" y="616" width="14" height="128" fill="#241a20" stroke="#0a0a12" stroke-width="3"/>
+  <rect x="822" y="548" width="140" height="54" rx="8" fill="#232c38" stroke="#0a0a12" stroke-width="5"/>
+  <rect x="834" y="560" width="56" height="28" rx="3" fill="#0b0b10" stroke="#0a0a12" stroke-width="2.4"/>
+  <g class="reelS"><circle cx="849" cy="574" r="7" fill="none" stroke="#c9bda3" stroke-width="2.6"/><line x1="849" y1="568" x2="849" y2="580" stroke="#c9bda3" stroke-width="2"/></g>
+  <g class="reelS"><circle cx="875" cy="574" r="7" fill="none" stroke="#c9bda3" stroke-width="2.6"/><line x1="875" y1="567" x2="875" y2="581" stroke="#c9bda3" stroke-width="2"/></g>
+  <rect x="900" y="560" width="50" height="10" rx="3" fill="#0b0b10" stroke="#0a0a12" stroke-width="2"/>
+  <rect x="900" y="576" width="50" height="10" rx="3" fill="#3a3a4a" stroke="#0a0a12" stroke-width="2"/>
+  <circle cx="952" cy="556" r="5" fill="#ff2e88" filter="url(#neonP)">
+    <animate attributeName="opacity" values="1;.12;1" dur="1.6s" repeatCount="indefinite"/>
+  </circle>
+  <text x="892" y="632" fill="#c9bda3" font-size="12" text-anchor="middle" opacity=".8" letter-spacing="3">CONTESTADOR</text>
+</g>
+<!-- escritorio -->
+<g>
+  <rect x="980" y="566" width="424" height="28" fill="url(#woodT)" stroke="#0a0a12" stroke-width="5"/>
+  <rect x="980" y="566" width="424" height="8" fill="#5e4256" opacity=".8"/>
+  <rect x="996" y="594" width="18" height="218" fill="#241a20" stroke="#0a0a12" stroke-width="4"/>
+  <rect x="1350" y="594" width="18" height="218" fill="#241a20" stroke="#0a0a12" stroke-width="4"/>
+  <rect x="1036" y="594" width="178" height="160" fill="#2b2033" stroke="#0a0a12" stroke-width="5"/>
+  <rect x="1048" y="608" width="154" height="60" rx="3" fill="#352741" stroke="#0a0a12" stroke-width="3.4"/>
+  <rect x="1048" y="680" width="154" height="60" rx="3" fill="#2e2138" stroke="#0a0a12" stroke-width="3.4"/>
+  <rect x="1102" y="634" width="46" height="9" rx="4" fill="#e8a33d" stroke="#0a0a12" stroke-width="2.4"/>
+  <rect x="1102" y="706" width="46" height="9" rx="4" fill="#e8a33d" stroke="#0a0a12" stroke-width="2.4"/>
+  <rect x="1056" y="614" width="40" height="16" fill="#efe6cc" opacity=".85" transform="rotate(-2 1076 622)"/>
+  <!-- CRT fosforo -->
   <g>
-    <rect x="830" y="556" width="132" height="46" rx="6" fill="#1b1624" stroke="#3a3044" stroke-width="3"/>
-    <rect x="842" y="568" width="52" height="22" rx="3" fill="#0b0b10"/>
-    <circle cx="856" cy="579" r="6" fill="none" stroke="#c9bda3" stroke-width="2.4"/>
-    <circle cx="880" cy="579" r="6" fill="none" stroke="#c9bda3" stroke-width="2.4"/>
-    <rect x="906" y="570" width="44" height="8" rx="2" fill="#0b0b10"/>
-    <rect x="906" y="584" width="44" height="8" rx="2" fill="#26262e"/>
-    <circle cx="954" cy="566" r="4" fill="#ff2e88" filter="url(#neonP)">
-      <animate attributeName="opacity" values="1;.15;1" dur="1.6s" repeatCount="indefinite"/>
+    <rect x="1172" y="418" width="208" height="152" rx="12" fill="#3a3244" stroke="#0a0a12" stroke-width="6"/>
+    <rect x="1172" y="418" width="208" height="152" rx="12" fill="#ffffff" opacity=".05"/>
+    <rect x="1192" y="438" width="168" height="112" rx="6" fill="#0a140d" stroke="#0a0a12" stroke-width="4"/>
+    <rect x="1192" y="438" width="168" height="112" rx="6" fill="#59d98c" opacity=".07"/>
+    <text class="crt-line1" x="1202" y="462" fill="#59d98c" font-size="14" font-family="monospace" opacity=".95">READY.</text>
+    <text x="1202" y="484" fill="#59d98c" font-size="12" font-family="monospace" opacity=".6">LOAD "",8,1</text>
+    <text x="1202" y="502" fill="#59d98c" font-size="12" font-family="monospace" opacity=".45">SEARCHING...</text>
+    <rect class="cursorBlk" x="1202" y="516" width="12" height="16" fill="#59d98c"/>
+    <circle cx="1352" cy="556" r="4" fill="#59d98c"/>
+    <rect x="1246" y="570" width="60" height="10" fill="#2b2333" stroke="#0a0a12" stroke-width="2.4"/>
+    <rect x="1366" y="440" width="26" height="26" fill="#ffd76a" stroke="#0a0a12" stroke-width="2" transform="rotate(6 1379 453)"/>
+    <rect x="1366" y="474" width="26" height="26" fill="#ff9ec7" stroke="#0a0a12" stroke-width="2" transform="rotate(-5 1379 487)"/>
+  </g>
+  <polygon points="1150,596 1336,596 1350,622 1136,622" fill="#c9bda3" stroke="#0a0a12" stroke-width="4"/>
+  ${Array.from({length:12},(_,i)=>`<rect x="${1156+i*15}" y="600" width="11" height="8" rx="1.6" fill="#8f8266"/>`).join('')}
+  ${Array.from({length:11},(_,i)=>`<rect x="${1162+i*15}" y="611" width="11" height="7" rx="1.6" fill="#8f8266"/>`).join('')}
+  <!-- osciloscopio -->
+  <g>
+    <rect x="984" y="464" width="158" height="108" rx="8" fill="#1b1626" stroke="#0a0a12" stroke-width="5"/>
+    <rect x="996" y="476" width="134" height="62" rx="4" fill="#050d08" stroke="#0a0a12" stroke-width="3"/>
+    <path d="M 1000 508 q 10 -18 20 0 t 20 0 t 20 0 t 20 0 t 20 0 t 20 0" fill="none" stroke="#59d98c" stroke-width="2.6"/>
+    <circle cx="1008" cy="552" r="6" fill="#ff2e88" stroke="#0a0a12" stroke-width="2">
+      <animate attributeName="opacity" values="1;.3;1" dur="2.2s" repeatCount="indefinite"/>
     </circle>
-    <text x="896" y="618" fill="#c9bda3" font-size="11" text-anchor="middle" opacity=".75" letter-spacing="2">CONTESTADOR</text>
+    <circle cx="1030" cy="552" r="6" fill="#3a3044" stroke="#0a0a12" stroke-width="2"/>
+    <circle cx="1106" cy="552" r="7" fill="#c9bda3" stroke="#0a0a12" stroke-width="2.4"/>
+    <circle cx="1126" cy="552" r="7" fill="#c9bda3" stroke="#0a0a12" stroke-width="2.4"/>
+    <text x="1063" y="532" fill="#59d98c" font-size="11" text-anchor="middle" opacity=".85" letter-spacing="2">MOD-R1</text>
+  </g>
+  <!-- libreta abierta -->
+  <g transform="translate(1148,516) rotate(-4)">
+    <path d="M 0 0 L 44 -4 L 88 0 L 88 48 L 44 44 L 0 48 Z" fill="#efe6cc" stroke="#0a0a12" stroke-width="3.4" stroke-linejoin="round"/>
+    <line x1="44" y1="-4" x2="44" y2="44" stroke="#0a0a12" stroke-width="2.4"/>
+    ${Array.from({length:4},(_,i)=>`<line x1="6" y1="${9+i*9}" x2="38" y2="${7+i*9}" stroke="#7a6f57" stroke-width="1.8"/>`).join('')}
+    ${Array.from({length:4},(_,i)=>`<line x1="52" y1="${7+i*9}" x2="82" y2="${9+i*9}" stroke="#7a6f57" stroke-width="1.8"/>`).join('')}
+    <rect x="58" y="-14" width="34" height="7" rx="3" fill="#e8a33d" stroke="#0a0a12" stroke-width="2" transform="rotate(14 75 -10)"/>
+  </g>
+  <!-- la cinta -->
+  <g transform="translate(1252,496)">
+    <rect width="112" height="70" rx="8" fill="#d8cba8" stroke="#0a0a12" stroke-width="4"/>
+    <rect x="12" y="10" width="88" height="30" rx="3" fill="#0b0b10" stroke="#0a0a12" stroke-width="2.4"/>
+    <g class="reelS"><circle cx="36" cy="25" r="10" fill="none" stroke="#d8cba8" stroke-width="3.4"/><line x1="36" y1="16" x2="36" y2="34" stroke="#d8cba8" stroke-width="2.6"/></g>
+    <g class="reelS"><circle cx="76" cy="25" r="10" fill="none" stroke="#d8cba8" stroke-width="3.4"/><line x1="76" y1="16" x2="76" y2="34" stroke="#d8cba8" stroke-width="2.6"/></g>
+    <path d="M 8 50 L 104 50 L 95 68 L 17 68 Z" fill="#0b0b10" opacity=".85"/>
+    <text x="56" y="65" fill="#d8cba8" font-size="11" text-anchor="middle" letter-spacing="1">EL PRIORATO</text>
+  </g>
+  <!-- taza con vapor -->
+  <g transform="translate(1158,528)">
+    <path d="M 0 6 L 26 6 L 23 34 L 3 34 Z" fill="#b43a4e" stroke="#0a0a12" stroke-width="3.4" stroke-linejoin="round"/>
+    <path d="M 26 12 q 12 2 10 10 q -2 8 -12 6" fill="none" stroke="#0a0a12" stroke-width="3.4"/>
+    <path class="steam" d="M 8 -2 q -5 -10 2 -16 q 6 -6 2 -14" fill="none" stroke="#c9bda3" stroke-width="2.6" stroke-linecap="round"/>
+    <path class="steam s2" d="M 17 -2 q 5 -10 -1 -16 q -5 -6 0 -14" fill="none" stroke="#c9bda3" stroke-width="2.2" stroke-linecap="round"/>
   </g>
 </g>
-<!-- cables por el suelo -->
-<path d="M 900 700 Q 1000 760 1150 730 T 1400 800" fill="none" stroke="#26262e" stroke-width="6"/>
-<path d="M 700 730 Q 850 790 1050 770" fill="none" stroke="#1d1d2e" stroke-width="6"/>
+<!-- mesa auxiliar con el Spectrum -->
+<g>
+  <polygon points="1342,640 1548,640 1560,668 1330,668" fill="#3a2a2e" stroke="#0a0a12" stroke-width="4"/>
+  <rect x="1350" y="668" width="16" height="110" fill="#241a20" stroke="#0a0a12" stroke-width="3"/>
+  <rect x="1528" y="668" width="16" height="110" fill="#241a20" stroke="#0a0a12" stroke-width="3"/>
+  <polygon points="1358,612 1536,612 1550,640 1346,640" fill="#c9c9d2" stroke="#0a0a12" stroke-width="4"/>
+  <polygon points="1358,612 1536,612 1544,626 1352,626" fill="#e8e8ee" opacity=".5"/>
+  ${Array.from({length:16},(_,i)=>`<rect x="${1366+i*10}" y="630" width="7" height="8" rx="1.4" fill="#3a3a44"/>`).join('')}
+  <rect x="1352" y="600" width="60" height="16" rx="3" fill="#2b2333" stroke="#0a0a12" stroke-width="2.6"/>
+  <text x="1445" y="600" fill="#2de2ff" font-size="14" letter-spacing="3" text-anchor="middle" opacity=".85">ZX · 48K</text>
+</g>
+<path d="M 900 700 Q 1000 762 1150 732 T 1400 800" fill="none" stroke="#0d0a10" stroke-width="9" stroke-linecap="round"/>
+<path d="M 900 700 Q 1000 762 1150 732 T 1400 800" fill="none" stroke="#26262e" stroke-width="5" stroke-linecap="round"/>
+<path d="M 700 730 Q 850 792 1050 772" fill="none" stroke="#0d0a10" stroke-width="8" stroke-linecap="round"/>
+<path d="M 700 730 Q 850 792 1050 772" fill="none" stroke="#1d1d2e" stroke-width="4" stroke-linecap="round"/>
+<!-- primer plano: respaldo de silla -->
+<g opacity=".92">
+  <path d="M 0 900 L 0 780 Q 90 730 180 780 L 180 900 Z" fill="#0e0c14" stroke="#050408" stroke-width="4"/>
+</g>
 <!-- HOTSPOTS -->
 <g id="hotspots">
-  <rect class="hs hs-pulse" data-hs="contestador" x="800" y="530" width="180" height="150"/>
-  <rect class="hs hs-pulse" data-hs="estanteria"  x="470"  y="290" width="290" height="345"/>
-  <rect class="hs hs-pulse" data-hs="libreta"     x="1136" y="500" width="110" height="62"/>
-  <rect class="hs hs-pulse" data-hs="osciloscopio" x="984"  y="462" width="160" height="112"/>
-  <rect class="hs hs-pulse" data-hs="crt"          x="1174" y="422" width="204" height="152"/>
-  <rect class="hs hs-pulse" data-hs="cinta"        x="1244" y="490" width="120" height="80"/>
-  <rect class="hs hs-pulse" data-hs="cajon"        x="1036" y="592" width="180" height="158"/>
-  <rect class="hs hs-pulse" data-hs="spectrum"     x="1330" y="600" width="230" height="90"/>
-  <rect class="hs hs-pulse" data-hs="puerta"       x="1452" y="310" width="148" height="450"/>
+  <rect class="hs hs-pulse" data-hs="contestador" x="806" y="530" width="180" height="150"/>
+  <rect class="hs hs-pulse" data-hs="estanteria"  x="458"  y="300" width="314" height="355"/>
+  <rect class="hs hs-pulse" data-hs="libreta"     x="1140" y="496" width="104" height="76"/>
+  <rect class="hs hs-pulse" data-hs="osciloscopio" x="980"  y="458" width="166" height="120"/>
+  <rect class="hs hs-pulse" data-hs="crt"          x="1168" y="412" width="218" height="168"/>
+  <rect class="hs hs-pulse" data-hs="cinta"        x="1244" y="488" width="126" height="86"/>
+  <rect class="hs hs-pulse" data-hs="cajon"        x="1032" y="590" width="186" height="168"/>
+  <rect class="hs hs-pulse" data-hs="spectrum"     x="1328" y="592" width="236" height="100"/>
+  <rect class="hs hs-pulse" data-hs="puerta"       x="1436" y="258" width="180" height="520"/>
 </g>
 </svg>`;
 }
-
 function svgCalle(){
 return `<svg viewBox="0 0 1600 900" preserveAspectRatio="xMidYMid slice">
 <defs>
   <linearGradient id="skyG" x1="0" y1="0" x2="0" y2="1">
-    <stop offset="0" stop-color="#150a24"/><stop offset=".6" stop-color="#0d0a1a"/><stop offset="1" stop-color="#0b0b10"/>
+    <stop offset="0" stop-color="#2a1240"/><stop offset=".5" stop-color="#17102e"/><stop offset="1" stop-color="#0d0a1a"/>
   </linearGradient>
   <linearGradient id="wetG" x1="0" y1="0" x2="0" y2="1">
-    <stop offset="0" stop-color="#14101f"/><stop offset="1" stop-color="#08070c"/>
+    <stop offset="0" stop-color="#1c1626"/><stop offset="1" stop-color="#0a0810"/>
   </linearGradient>
+  <linearGradient id="shopG2" x1="0" y1="0" x2="0" y2="1">
+    <stop offset="0" stop-color="#241d33"/><stop offset="1" stop-color="#16121f"/>
+  </linearGradient>
+  <linearGradient id="awnG" x1="0" y1="0" x2="0" y2="1">
+    <stop offset="0" stop-color="#7a2e4a"/><stop offset="1" stop-color="#4a1c30"/>
+  </linearGradient>
+  <linearGradient id="winShop" x1="0" y1="0" x2="0" y2="1">
+    <stop offset="0" stop-color="#1c3a2e"/><stop offset="1" stop-color="#0c1a14"/>
+  </linearGradient>
+  <radialGradient id="moonH" cx=".5" cy=".5" r=".5">
+    <stop offset="0" stop-color="#f4ead2" stop-opacity=".5"/><stop offset="1" stop-color="#f4ead2" stop-opacity="0"/>
+  </radialGradient>
   ${NEON_DEFS}
 </defs>
 <rect width="1600" height="900" fill="url(#skyG)"/>
-<circle cx="1330" cy="140" r="52" fill="#e8ddc0" opacity=".85"/>
-<!-- skyline ochentera -->
-<g fill="#0a0812">
-  <path d="M 60 640 V 300 h 60 v -50 h 50 v 50 h 60 V 640 Z"/>
-  <path d="M 230 640 V 220 h 50 v -46 h 44 v -40 h 40 v 40 h 44 v 46 h 50 V 640 Z"/>
-  <path d="M 1150 640 V 260 h 56 v -44 h 48 v -44 h 40 v 44 h 48 v 44 h 56 V 640 Z"/>
-  <path d="M 1400 640 V 330 h 46 v -40 h 40 v 40 h 46 V 640 Z"/>
+<!-- nubes -->
+<g fill="#241a3a" opacity=".85">
+  <ellipse cx="380" cy="150" rx="190" ry="34"/>
+  <ellipse cx="520" cy="128" rx="130" ry="26"/>
+  <ellipse cx="1120" cy="90" rx="220" ry="30"/>
+  <ellipse cx="1250" cy="70" rx="120" ry="22"/>
 </g>
-<g fill="#2de2ff" opacity=".5">
-  ${Array.from({length:16},(_,i)=>{const x=[90,120,150,260,290,320,350,1180,1210,1240,1270,1300,1420,1450][i%14]+((i*37)%5)*8; const y=240+((i*89)%360); return `<rect x="${x}" y="${y}" width="7" height="10"/>`;}).join('')}
+<!-- luna con halo -->
+<circle cx="1330" cy="150" r="110" fill="url(#moonH)"/>
+<circle cx="1330" cy="150" r="58" fill="#efe6cc" stroke="#0a0a12" stroke-width="4"/>
+<circle cx="1312" cy="136" r="10" fill="#d9cbaa"/>
+<circle cx="1348" cy="166" r="7" fill="#d9cbaa"/>
+<circle cx="1326" cy="172" r="5" fill="#e0d4b4"/>
+<!-- estrellas -->
+<g fill="#f0e9d8">
+  ${Array.from({length:22},(_,i)=>`<circle cx="${(i*167)%1600}" cy="${30+(i*89)%280}" r="${1+(i%3)*.7}" opacity="${.3+(i%5)*.14}"/>`).join('')}
+</g>
+<!-- skyline lejano -->
+<g fill="#120d20" stroke="#0a0a12" stroke-width="4">
+  <path d="M -20 620 V 380 h 70 v -56 h 56 v 56 h 66 V 620 Z"/>
+  <path d="M 210 620 V 260 h 56 v -48 h 48 v -42 h 42 v 42 h 48 v 48 h 56 V 620 Z"/>
+  <path d="M 1090 620 V 300 h 60 v -48 h 50 v -42 h 44 v 42 h 50 v 48 h 60 V 620 Z"/>
+  <path d="M 1420 620 V 380 h 52 v -44 h 44 v 44 h 52 V 620 Z"/>
+</g>
+<!-- antenas -->
+<g stroke="#0a0a12" stroke-width="5" stroke-linecap="round">
+  <line x1="335" y1="170" x2="335" y2="96"/><line x1="320" y1="120" x2="350" y2="120"/>
+  <line x1="1244" y1="210" x2="1244" y2="140"/><line x1="1228" y1="164" x2="1260" y2="164"/>
+</g>
+<circle cx="335" cy="94" r="6" fill="#ff5a4e"><animate attributeName="opacity" values="1;.1;1" dur="2.4s" repeatCount="indefinite"/></circle>
+<circle cx="1244" cy="138" r="6" fill="#ff5a4e"><animate attributeName="opacity" values=".1;1;.1" dur="3.1s" repeatCount="indefinite"/></circle>
+<!-- ventanas skyline -->
+<g fill="#2de2ff" opacity=".55">
+  ${Array.from({length:14},(_,i)=>{const x=[20,50,80,250,280,310,340,1120,1150,1180,1210,1240,1440,1490][i%14]+((i*37)%5)*8; const y=300+((i*89)%280); return `<rect x="${x}" y="${y}" width="9" height="13" rx="1.5"/>`;}).join('')}
+</g>
+<g fill="#ffd76a" opacity=".55">
+  ${Array.from({length:10},(_,i)=>{const x=[35,265,325,1135,1195,1255,1465][i%7]+((i*53)%5)*8; const y=320+((i*113)%250); return `<rect x="${x}" y="${y}" width="9" height="13" rx="1.5"/>`;}).join('')}
 </g>
 <g fill="#ff2e88" opacity=".5">
-  ${Array.from({length:10},(_,i)=>{const x=[105,275,335,1195,1255,1315,1435][i%7]+((i*53)%5)*8; const y=260+((i*113)%330); return `<rect x="${x}" y="${y}" width="7" height="10"/>`;}).join('')}
+  ${Array.from({length:6},(_,i)=>{const x=[65,295,1165,1225,1480,1520][i%6]+((i*29)%4)*8; const y=340+((i*97)%220); return `<rect x="${x}" y="${y}" width="9" height="13" rx="1.5"/>`;}).join('')}
 </g>
 <!-- calle mojada -->
-<rect y="640" width="1600" height="260" fill="url(#wetG)"/>
-<g opacity=".2">
-  ${Array.from({length:9},(_,i)=>`<line x1="${240+i*140}" y1="660" x2="${220+i*140}" y2="880" stroke="${i%2?'#ff2e88':'#2de2ff'}" stroke-width="${3+(i%3)}"/>`).join('')}
+<rect y="620" width="1600" height="280" fill="url(#wetG)"/>
+<!-- reflejos verticales de los letreros -->
+<g opacity=".5">
+  <polygon points="700,640 780,640 760,900 690,900" fill="#ff2e88" opacity=".28"/>
+  <polygon points="820,640 880,640 870,900 810,900" fill="#2de2ff" opacity=".28"/>
+  <polygon points="620,640 660,640 630,900 590,900" fill="#ff2e88" opacity=".14"/>
+  <polygon points="250,640 280,640 250,900 220,900" fill="#e8a33d" opacity=".3"/>
+  <polygon points="1310,640 1360,640 1350,900 1290,900" fill="#efe6cc" opacity=".10"/>
 </g>
-<!-- coche ochentero aparcado -->
-<g transform="translate(1120,600)">
-  <path d="M 0 70 L 14 34 L 66 22 L 96 0 L 176 0 L 206 22 L 258 30 L 270 70 Z" fill="#12121c" stroke="#26262e" stroke-width="3"/>
-  <rect x="66" y="12" width="60" height="22" fill="#1b2b33"/>
-  <rect x="136" y="12" width="56" height="22" fill="#1b2b33"/>
-  <circle cx="60" cy="72" r="18" fill="#0b0b10" stroke="#3a3a44" stroke-width="4"/>
-  <circle cx="212" cy="72" r="18" fill="#0b0b10" stroke="#3a3a44" stroke-width="4"/>
-  <rect x="252" y="40" width="14" height="10" fill="#ff5a4e" filter="url(#neonP)"/>
+<!-- lineas de calzada y bordillo -->
+<rect y="620" width="1600" height="14" fill="#241d33" stroke="#0a0a12" stroke-width="3"/>
+<g stroke="#c9bda3" stroke-width="6" stroke-dasharray="60 46" opacity=".35">
+  <line x1="0" y1="790" x2="1600" y2="790"/>
 </g>
-<!-- fachada con rótulo de neón -->
+<!-- charcos -->
 <g>
-  <path d="M 520 640 V 240 h 560 V 640 Z" fill="#12101c" stroke="#26262e" stroke-width="5"/>
-  <rect x="520" y="240" width="560" height="10" fill="#1d1d2e"/>
-  <text x="800" y="312" fill="#ff2e88" font-size="40" letter-spacing="6" text-anchor="middle" font-weight="500" filter="url(#neonP)">ELECTRÒNICA</text>
-  <text x="800" y="356" fill="#2de2ff" font-size="34" letter-spacing="10" text-anchor="middle" filter="url(#neonC)">PORTELL</text>
-  <text x="800" y="388" fill="#b9b4a4" font-size="14" letter-spacing="6" text-anchor="middle" opacity=".8">COMPONENTS · DES DE 1974</text>
-  <!-- escaparate -->
-  <rect x="560" y="420" width="220" height="200" fill="#0a1210" stroke="#26262e" stroke-width="5"/>
-  <g opacity=".85">
-    ${Array.from({length:3},(_,r)=>Array.from({length:4},(_,c)=>`<rect x="${578+c*50}" y="${438+r*56}" width="38" height="42" fill="none" stroke="#59d98c" stroke-opacity=".3" stroke-width="2"/>`).join('')).join('')}
-    ${Array.from({length:12},(_,i)=>`<circle cx="${597+(i%4)*50}" cy="${459+((i/4)|0)*56}" r="7" fill="#3d6b5e" opacity=".55"/>`).join('')}
+  <ellipse cx="420" cy="830" rx="120" ry="16" fill="#1c2a48" opacity=".8"/>
+  <ellipse cx="420" cy="830" rx="120" ry="16" fill="none" stroke="#2de2ff" stroke-opacity=".25" stroke-width="2.4"/>
+  <ellipse cx="420" cy="827" rx="70" ry="8" fill="#2de2ff" opacity=".14"/>
+  <ellipse cx="1080" cy="860" rx="150" ry="18" fill="#241236" opacity=".8"/>
+  <ellipse cx="1080" cy="860" rx="150" ry="18" fill="none" stroke="#ff2e88" stroke-opacity=".25" stroke-width="2.4"/>
+  <ellipse cx="1080" cy="856" rx="84" ry="9" fill="#ff2e88" opacity=".14"/>
+</g>
+<!-- fachada de la tienda -->
+<g>
+  <path d="M 520 640 V 250 h 560 V 640 Z" fill="url(#shopG2)" stroke="#0a0a12" stroke-width="7"/>
+  <rect x="520" y="238" width="560" height="18" fill="#312843" stroke="#0a0a12" stroke-width="4"/>
+  <g stroke="#0a0a12" stroke-width="2.4" opacity=".5">
+    ${Array.from({length:7},(_,i)=>`<line x1="530" y1="${420+i*30}" x2="1070" y2="${420+i*30}"/>`).join('')}
   </g>
-  <!-- puerta -->
-  <rect x="830" y="420" width="130" height="220" fill="#17141f" stroke="#2de2ff" stroke-width="2" opacity=".95"/>
-  <rect x="830" y="420" width="130" height="220" fill="none" stroke="#2de2ff" stroke-width="4" filter="url(#neonC)" opacity=".8"/>
-  <rect x="872" y="490" width="10" height="110" rx="5" fill="#e8a33d"/>
-  <text x="895" y="460" fill="#ff2e88" font-size="17" letter-spacing="3" text-anchor="middle" filter="url(#neonP)">OBERT</text>
+  <!-- cornisa con remates -->
+  <g fill="#312843" stroke="#0a0a12" stroke-width="4">
+    <rect x="510" y="226" width="580" height="16" rx="4"/>
+    <circle cx="540" cy="226" r="10"/><circle cx="1060" cy="226" r="10"/>
+  </g>
+  <!-- rotulos de neon -->
+  <text x="800" y="308" fill="#ff2e88" font-size="42" letter-spacing="6" text-anchor="middle" font-weight="500" filter="url(#neonP)">ELECTRÒNICA</text>
+  <text x="800" y="352" fill="#2de2ff" font-size="35" letter-spacing="10" text-anchor="middle" filter="url(#neonC)">P<tspan class="flick">O</tspan>RTELL</text>
+  <text x="800" y="384" fill="#b9b4a4" font-size="14" letter-spacing="6" text-anchor="middle" opacity=".85">COMPONENTS · DES DE 1974</text>
+  <!-- toldo -->
+  <g>
+    <path d="M 548 400 L 1052 400 L 1020 452 L 580 452 Z" fill="url(#awnG)" stroke="#0a0a12" stroke-width="5" stroke-linejoin="round"/>
+    <g stroke="#0a0a12" stroke-width="3" opacity=".55">
+      ${Array.from({length:8},(_,i)=>`<line x1="${580+i*62}" y1="400" x2="${596+i*56}" y2="452"/>`).join('')}
+    </g>
+    <path d="M 580 452 q 30 18 62 0 q 30 18 62 0 q 30 18 62 0 q 30 18 62 0 q 30 18 62 0 q 30 18 62 0 q 30 18 70 0" fill="none" stroke="#0a0a12" stroke-width="5"/>
+  </g>
+</g>
+<!-- escaparate -->
+<g>
+  <rect x="556" y="466" width="228" height="162" fill="url(#winShop)" stroke="#0a0a12" stroke-width="6"/>
+  <line x1="670" y1="466" x2="670" y2="628" stroke="#0a0a12" stroke-width="5"/>
+  <rect x="566" y="476" width="96" height="142" fill="#59d98c" opacity=".07"/>
+  <g opacity=".9">
+    ${Array.from({length:2},(_,r)=>Array.from({length:4},(_,c)=>`<rect x="${576+c*24}" y="${486+r*56}" width="18" height="42" rx="3" fill="#3d6b5e" stroke="#0a0a12" stroke-width="2.2"/>`).join('')).join('')}
+    ${Array.from({length:3},(_,i)=>`<circle cx="${700+i*26}" cy="${500+i*30}" r="9" fill="#8a5c33" stroke="#0a0a12" stroke-width="2.2"/>`).join('')}
+    <rect x="690" y="566" width="80" height="46" rx="4" fill="#241c30" stroke="#0a0a12" stroke-width="2.6"/>
+    <circle cx="706" cy="589" r="12" fill="#0b0b10" stroke="#e8a33d" stroke-width="2.4"/>
+    <rect x="726" y="578" width="34" height="8" rx="2" fill="#ffd76a" opacity=".8"/>
+  </g>
+  <!-- reflejo del cristal -->
+  <polygon points="570,470 640,470 600,626 556,626" fill="#cfefff" opacity=".08"/>
+</g>
+<!-- puerta de la tienda -->
+<g>
+  <rect x="826" y="466" width="136" height="174" fill="#17141f" stroke="#0a0a12" stroke-width="6"/>
+  <rect x="838" y="478" width="112" height="120" fill="#101a20" stroke="#2de2ff" stroke-width="3" filter="url(#neonC)" opacity=".95"/>
+  <polygon points="844,482 896,482 856,596 838,596" fill="#cfefff" opacity=".09"/>
+  <rect x="868" y="600" width="12" height="36" rx="6" fill="#e8a33d" stroke="#0a0a12" stroke-width="3"/>
+  <g transform="rotate(-4 895 520)">
+    <rect x="850" y="500" width="90" height="36" rx="6" fill="#0b0b10" stroke="#ff2e88" stroke-width="3" filter="url(#neonP)"/>
+    <text x="895" y="526" fill="#ff2e88" font-size="19" letter-spacing="4" text-anchor="middle">OBERT</text>
+  </g>
+  <rect x="816" y="636" width="156" height="12" fill="#312843" stroke="#0a0a12" stroke-width="3"/>
 </g>
 <!-- farola de sodio -->
 <g>
-  <rect x="250" y="330" width="10" height="330" fill="#0a0a0f"/>
-  <rect x="222" y="322" width="66" height="14" rx="7" fill="#12121c" stroke="#26262e" stroke-width="3"/>
-  <ellipse cx="255" cy="340" rx="10" ry="6" fill="#ffd76a"/>
-  <polygon points="245,346 265,346 330,660 180,660" fill="#e8a33d" opacity=".08"/>
+  <ellipse cx="255" cy="664" rx="120" ry="20" fill="#e8a33d" opacity=".14"/>
+  <polygon points="246,352 264,352 330,664 180,664" fill="#e8a33d" opacity=".10"/>
+  <rect x="248" y="340" width="14" height="316" fill="#14111c" stroke="#0a0a12" stroke-width="4"/>
+  <path d="M 220 340 Q 255 310 290 340 L 282 356 Q 255 336 228 356 Z" fill="#1d1d2e" stroke="#0a0a12" stroke-width="4" stroke-linejoin="round"/>
+  <ellipse cx="255" cy="350" rx="14" ry="8" fill="#ffd76a" stroke="#0a0a12" stroke-width="3"/>
+  <rect x="236" y="470" width="38" height="50" fill="#241d33" stroke="#0a0a12" stroke-width="3" transform="rotate(-3 255 495)"/>
+  <text x="255" y="502" fill="#b9b4a4" font-size="11" text-anchor="middle" letter-spacing="1" transform="rotate(-3 255 495)">1987</text>
+</g>
+<!-- contenedor y bolsas -->
+<g>
+  <rect x="1120" y="560" width="130" height="92" rx="8" fill="#1d2b26" stroke="#0a0a12" stroke-width="5"/>
+  <rect x="1120" y="560" width="130" height="18" rx="8" fill="#28443a" stroke="#0a0a12" stroke-width="4"/>
+  <rect x="1136" y="592" width="98" height="10" rx="5" fill="#0e1a16"/>
+  <path d="M 1262 640 q -4 -34 20 -40 q 26 -6 24 20 q 24 -2 22 24 l 0 8 l -66 0 Z" fill="#14111c" stroke="#0a0a12" stroke-width="4"/>
+  <circle cx="1290" cy="612" r="3.4" fill="#0a0a12"/>
+</g>
+<!-- vapor de alcantarilla -->
+<g>
+  <ellipse cx="700" cy="760" rx="60" ry="10" fill="#0a0810" stroke="#26262e" stroke-width="3"/>
+  <path class="steam" d="M 686 740 q -8 -16 2 -26 q 10 -10 2 -24" fill="none" stroke="#8a8aa0" stroke-width="4" stroke-linecap="round" opacity=".5"/>
+  <path class="steam s2" d="M 712 742 q 8 -16 -2 -26 q -8 -10 0 -24" fill="none" stroke="#8a8aa0" stroke-width="3.4" stroke-linecap="round" opacity=".45"/>
+</g>
+<!-- coche ochentero aparcado -->
+<g transform="translate(1180,556)">
+  <ellipse cx="130" cy="118" rx="150" ry="14" fill="#05040a" opacity=".7"/>
+  <path d="M 0 84 L 16 44 L 70 30 L 102 4 L 182 4 L 214 30 L 266 40 L 280 84 Z" fill="#4a1c3a" stroke="#0a0a12" stroke-width="5" stroke-linejoin="round"/>
+  <path d="M 16 44 L 70 30 L 102 4 L 182 4 L 214 30 L 266 40 L 262 48 L 20 52 Z" fill="#6b2c55" opacity=".9"/>
+  <rect x="72" y="14" width="62" height="26" rx="4" fill="#12222e" stroke="#0a0a12" stroke-width="3.4"/>
+  <rect x="142" y="14" width="60" height="26" rx="4" fill="#12222e" stroke="#0a0a12" stroke-width="3.4"/>
+  <polygon points="76,16 106,16 84,38 72,38" fill="#cfefff" opacity=".14"/>
+  <rect x="262" y="52" width="16" height="12" rx="3" fill="#ff5a4e" stroke="#0a0a12" stroke-width="2.4" filter="url(#neonP)"/>
+  <rect x="2" y="52" width="16" height="12" rx="3" fill="#ffd76a" stroke="#0a0a12" stroke-width="2.4"/>
+  <circle cx="64" cy="86" r="24" fill="#0b0b10" stroke="#0a0a12" stroke-width="5"/>
+  <circle cx="64" cy="86" r="10" fill="#3a3a44" stroke="#0a0a12" stroke-width="3"/>
+  <circle cx="216" cy="86" r="24" fill="#0b0b10" stroke="#0a0a12" stroke-width="5"/>
+  <circle cx="216" cy="86" r="10" fill="#3a3a44" stroke="#0a0a12" stroke-width="3"/>
+  <rect x="120" y="60" width="40" height="8" rx="4" fill="#e8a33d" opacity=".8"/>
+</g>
+<!-- gato negro junto al contenedor -->
+<g transform="translate(1030,612)">
+  <path d="M 8 26 Q 6 6 22 4 L 40 4 Q 56 6 54 26 L 52 34 L 10 34 Z" fill="#0d0b14" stroke="#050408" stroke-width="3"/>
+  <circle cx="16" cy="6" r="11" fill="#0d0b14" stroke="#050408" stroke-width="3"/>
+  <polygon points="8,0 6,-12 16,-4" fill="#0d0b14" stroke="#050408" stroke-width="2.4"/>
+  <polygon points="22,-4 28,-14 30,-2" fill="#0d0b14" stroke="#050408" stroke-width="2.4"/>
+  <circle cx="12" cy="5" r="2.2" fill="#59d98c"/>
+  <circle cx="20" cy="5" r="2.2" fill="#59d98c"/>
+  <path d="M 54 22 q 22 -6 18 -26" fill="none" stroke="#0d0b14" stroke-width="7" stroke-linecap="round"/>
 </g>
 <!-- cartel de vuelta -->
 <g>
-  <polygon points="30,770 190,770 170,830 30,830" fill="#12101c" stroke="#2de2ff" stroke-width="2"/>
+  <polygon points="30,770 190,770 170,830 30,830" fill="#12101c" stroke="#0a0a12" stroke-width="4"/>
+  <polygon points="30,770 190,770 170,830 30,830" fill="none" stroke="#2de2ff" stroke-width="2" filter="url(#neonC)"/>
   <text x="108" y="808" fill="#2de2ff" font-size="22" letter-spacing="3" text-anchor="middle" filter="url(#neonC)">← TALLER</text>
 </g>
 ${rainLines(46,-80,900)}
 ${rainLines(30,-80,900,'slow')}
+<!-- primer plano: esquina de edificio -->
+<path d="M 1600 900 L 1600 690 L 1540 660 L 1500 900 Z" fill="#08070c"/>
 <!-- HOTSPOTS -->
 <g id="hotspots">
-  <rect class="hs hs-pulse" data-hs="escaparate"  x="552"  y="412" width="236" height="216"/>
-  <rect class="hs hs-pulse" data-hs="puerta_tienda" x="822" y="412" width="146" height="232"/>
-  <rect class="hs hs-pulse" data-hs="farola"      x="200"  y="300" width="110" height="370"/>
+  <rect class="hs hs-pulse" data-hs="escaparate"  x="550"  y="458" width="240" height="180"/>
+  <rect class="hs hs-pulse" data-hs="puerta_tienda" x="816" y="458" width="156" height="190"/>
+  <rect class="hs hs-pulse" data-hs="farola"      x="200"  y="300" width="110" height="380"/>
   <rect class="hs hs-pulse" data-hs="a_taller"    x="24"   y="762" width="176" height="76"/>
 </g>
 </svg>`;
 }
-
 function svgTienda(){
 return `<svg viewBox="0 0 1600 900" preserveAspectRatio="xMidYMid slice">
 <defs>
   <linearGradient id="shopG" x1="0" y1="0" x2="0" y2="1">
-    <stop offset="0" stop-color="#131222"/><stop offset="1" stop-color="#0d0c15"/>
+    <stop offset="0" stop-color="#1c1930"/><stop offset="1" stop-color="#100e1a"/>
+  </linearGradient>
+  <linearGradient id="tileG" x1="0" y1="0" x2="0" y2="1">
+    <stop offset="0" stop-color="#1a1624"/><stop offset="1" stop-color="#0c0a12"/>
+  </linearGradient>
+  <linearGradient id="counterG" x1="0" y1="0" x2="0" y2="1">
+    <stop offset="0" stop-color="#43304a"/><stop offset="1" stop-color="#2a1e30"/>
+  </linearGradient>
+  <linearGradient id="posterSun2" x1="0" y1="0" x2="0" y2="1">
+    <stop offset="0" stop-color="#ffd76a"/><stop offset="1" stop-color="#ff2e88"/>
   </linearGradient>
   ${NEON_DEFS}
 </defs>
 <rect width="1600" height="900" fill="url(#shopG)"/>
-<polygon points="0,720 1600,720 1600,900 0,900" fill="#0e0d14"/>
-<g stroke="#1d1d2e" stroke-width="3" opacity=".8">
-  ${Array.from({length:12},(_,i)=>`<line x1="${i*140}" y1="720" x2="${i*140-60}" y2="900"/>`).join('')}
+<!-- techo con vigas -->
+<rect width="1600" height="90" fill="#14111e"/>
+<g fill="#0e0c16" stroke="#0a0a12" stroke-width="3">
+  <rect x="0" y="86" width="1600" height="12"/>
+  <rect x="200" y="0" width="30" height="90"/><rect x="800" y="0" width="30" height="90"/><rect x="1400" y="0" width="30" height="90"/>
 </g>
-<!-- fluorescente del techo -->
+<!-- cables colgando -->
+<path d="M 400 90 q 60 70 150 26" fill="none" stroke="#0d0a10" stroke-width="7" stroke-linecap="round"/>
+<path d="M 400 90 q 60 70 150 26" fill="none" stroke="#26262e" stroke-width="3.6" stroke-linecap="round"/>
+<path d="M 1150 90 q -50 80 -130 30" fill="none" stroke="#0d0a10" stroke-width="7" stroke-linecap="round"/>
+<path d="M 1150 90 q -50 80 -130 30" fill="none" stroke="#26262e" stroke-width="3.6" stroke-linecap="round"/>
+<!-- fluorescente -->
 <g>
-  <rect x="620" y="60" width="360" height="16" rx="8" fill="#1d1d2e" stroke="#26262e" stroke-width="3"/>
-  <rect class="fluor" x="632" y="64" width="336" height="8" rx="4" fill="#cfefff" filter="url(#neonC)"/>
-  <polygon points="640,80 960,80 1120,720 480,720" fill="#2de2ff" opacity=".045"/>
+  <rect x="620" y="60" width="360" height="18" rx="9" fill="#1d1d2e" stroke="#0a0a12" stroke-width="4"/>
+  <rect class="fluor" x="632" y="65" width="336" height="9" rx="4" fill="#cfefff" filter="url(#neonC)"/>
+  <polygon points="640,86 960,86 1160,720 440,720" fill="#2de2ff" opacity=".05"/>
 </g>
-<!-- estantería de cajones -->
+<!-- suelo de damero -->
+<polygon points="0,700 1600,700 1600,900 0,900" fill="url(#tileG)"/>
+<g stroke="#241d33" stroke-width="3" opacity=".9">
+  ${Array.from({length:14},(_,i)=>`<line x1="${i*125}" y1="700" x2="${i*125-90}" y2="900"/>`).join('')}
+  ${Array.from({length:6},(_,i)=>`<line x1="0" y1="${716+i*34}" x2="1600" y2="${716+i*34}"/>`).join('')}
+</g>
+<g opacity=".16" fill="#cfefff">
+  ${Array.from({length:12},(_,i)=>`<polygon points="${i*140+20},${730+(i%3)*40} ${i*140+90},${730+(i%3)*40} ${i*140+70},${762+(i%3)*40} ${i*140},${762+(i%3)*40}"/>`).join('')}
+</g>
+<!-- estanteria de cajones -->
 <g>
-  <rect x="80" y="140" width="520" height="540" fill="#12121c" stroke="#26262e" stroke-width="6"/>
-  <rect x="80" y="136" width="520" height="5" fill="#ff2e88" filter="url(#neonP)" opacity=".8"/>
-  ${Array.from({length:6},(_,r)=>Array.from({length:5},(_,c)=>
-    `<rect x="${96+c*100}" y="${156+r*88}" width="88" height="76" fill="#1a1726" stroke="#2b2438" stroke-width="3"/>
-     <rect x="${126+c*100}" y="${182+r*88}" width="28" height="5" fill="#e8a33d" opacity=".6"/>
-     <text x="${140+c*100}" y="${214+r*88}" fill="#b9b4a4" font-size="10" text-anchor="middle" opacity=".65">${['RESIST.','CONDENS.','XIPS','CINTES','VALVES'][c]}</text>`
-  ).join('')).join('')}
+  <rect x="80" y="150" width="520" height="520" fill="#1c1626" stroke="#0a0a12" stroke-width="7"/>
+  <rect x="92" y="162" width="496" height="496" fill="#120e1a"/>
+  ${Array.from({length:6},(_,r)=>Array.from({length:5},(_,c)=>{
+    const tilt=((r*7+c*3)%11===0)?' transform="rotate(-1.5 '+(140+c*100)+' '+(194+r*80)+')"':'';
+    return `<g${tilt}><rect x="${96+c*100}" y="${166+r*80}" width="88" height="66" rx="3" fill="${['#241d33','#2a2138','#201a2c'][(r+c)%3]}" stroke="#0a0a12" stroke-width="3.4"/>
+     <rect x="${126+c*100}" y="${190+r*80}" width="28" height="6" rx="3" fill="#e8a33d" opacity=".75"/>
+     <text x="${140+c*100}" y="${220+r*80}" fill="#b9b4a4" font-size="10" text-anchor="middle" opacity=".7">${['RESIST.','CONDENS.','XIPS','CINTES','VALVES'][c]}</text></g>`;
+  }).join('')).join('')}
+  <rect x="80" y="144" width="520" height="8" fill="#ff2e88" filter="url(#neonP)" opacity=".85"/>
+  <rect x="80" y="144" width="520" height="8" fill="#0a0a12" opacity=".25"/>
 </g>
-<!-- cartel OBERT en la pared -->
-<text x="1360" y="200" fill="#ff2e88" font-size="34" letter-spacing="8" text-anchor="middle" filter="url(#neonP)" transform="rotate(3 1360 200)">OBERT</text>
-<!-- Portell detrás del mostrador -->
-<g transform="translate(980,260)">
-  <path d="M 60 260 L 160 260 L 150 130 Q 110 96 70 130 Z" fill="#232c38"/>
-  <circle cx="110" cy="86" r="52" fill="#c9a06a"/>
-  <path d="M 62 78 Q 110 30 158 78 L 158 62 Q 110 18 62 62 Z" fill="#1a1726"/>
-  <circle cx="90" cy="88" r="13" fill="none" stroke="#14111c" stroke-width="4"/>
-  <circle cx="130" cy="88" r="13" fill="none" stroke="#14111c" stroke-width="4"/>
-  <line x1="103" y1="88" x2="117" y2="88" stroke="#14111c" stroke-width="4"/>
-  <path d="M 96 122 Q 110 130 124 122" fill="none" stroke="#14111c" stroke-width="4"/>
-  <path d="M 96 118 Q 110 136 124 118" fill="#14111c" opacity=".9"/>
-  <polygon points="96,150 124,150 110,166" fill="#ff2e88"/>
+<!-- caja de valvulas encima -->
+<g transform="rotate(2 420 128)">
+  <rect x="350" y="104" width="140" height="44" fill="#6b5a3a" stroke="#0a0a12" stroke-width="4"/>
+  <text x="420" y="132" fill="#efe6cc" font-size="13" letter-spacing="2" text-anchor="middle">VÀLVULES</text>
+</g>
+<!-- escalera de mano -->
+<g stroke="#0a0a12" stroke-width="5" stroke-linecap="round">
+  <line x1="624" y1="300" x2="590" y2="680"/>
+  <line x1="664" y1="300" x2="640" y2="680"/>
+  ${Array.from({length:5},(_,i)=>`<line x1="${618-i*6}" y1="${360+i*70}" x2="${658-i*4}" y2="${360+i*70}"/>`).join('')}
+</g>
+<g stroke="#8a5c33" stroke-width="3" stroke-linecap="round">
+  ${Array.from({length:5},(_,i)=>`<line x1="${618-i*6}" y1="${360+i*70}" x2="${658-i*4}" y2="${360+i*70}"/>`).join('')}
+</g>
+<!-- ventana al fondo con persiana y lluvia -->
+<g>
+  <rect x="1150" y="130" width="330" height="240" fill="#0d0b14" stroke="#0a0a12" stroke-width="6"/>
+  <rect x="1164" y="144" width="302" height="212" fill="#101a30" stroke="#0a0a12" stroke-width="3"/>
+  <g stroke="#59d98c" stroke-opacity=".25" stroke-width="2.4">
+    ${Array.from({length:12},(_,i)=>`<line x1="${1180+(i*83)%270}" y1="${150+(i*47)%60}" x2="${1170+(i*83)%270}" y2="${210+(i*47)%60}"/>`).join('')}
+  </g>
+  <circle cx="1420" cy="190" r="24" fill="#efe6cc" opacity=".85"/>
+  <g stroke="#262b3a" stroke-width="7">
+    ${Array.from({length:8},(_,i)=>`<line x1="1164" y1="${158+i*26}" x2="1466" y2="${158+i*26}"/>`).join('')}
+  </g>
+  <rect x="1150" y="356" width="330" height="14" fill="#1c1826" stroke="#0a0a12" stroke-width="3"/>
+</g>
+<!-- cartel OBERT y carteles -->
+<text x="1360" y="420" fill="#ff2e88" font-size="34" letter-spacing="8" text-anchor="middle" filter="url(#neonP)" transform="rotate(3 1360 420)">OBERT</text>
+<g transform="rotate(-3 1085 240)">
+  <rect x="1030" y="180" width="110" height="120" fill="#efe6cc" stroke="#0a0a12" stroke-width="4"/>
+  <circle cx="1085" cy="226" r="30" fill="#ff2e88" opacity=".85"/>
+  <circle cx="1085" cy="226" r="30" fill="none" stroke="#0a0a12" stroke-width="3"/>
+  <line x1="1064" y1="247" x2="1106" y2="205" stroke="#0a0a12" stroke-width="6"/>
+  <text x="1085" y="286" fill="#14111c" font-size="12" letter-spacing="1" text-anchor="middle" font-weight="700">NO FUMAR</text>
+</g>
+<g transform="rotate(2 690 200)">
+  <rect x="640" y="150" width="100" height="104" fill="#141026" stroke="#0a0a12" stroke-width="4"/>
+  <circle cx="690" cy="196" r="30" fill="url(#posterSun2)"/>
+  <text x="690" y="242" fill="#2de2ff" font-size="12" letter-spacing="2" text-anchor="middle">SINTHO 87</text>
+</g>
+<!-- ventilador de techo -->
+<g>
+  <line x1="1280" y1="90" x2="1280" y2="120" stroke="#0a0a12" stroke-width="6"/>
+  <g class="fanSpin">
+    <path d="M 1280 126 L 1352 110 Q 1362 122 1350 128 L 1280 132 Z" fill="#3a3a44" stroke="#0a0a12" stroke-width="3"/>
+    <path d="M 1280 126 L 1214 158 Q 1208 146 1218 140 L 1282 122 Z" fill="#3a3a44" stroke="#0a0a12" stroke-width="3"/>
+    <path d="M 1280 126 L 1240 68 Q 1252 62 1258 72 L 1286 124 Z" fill="#3a3a44" stroke="#0a0a12" stroke-width="3"/>
+    <animateTransform attributeName="transform" type="rotate" from="0 1280 126" to="360 1280 126" dur="2.6s" repeatCount="indefinite"/>
+  </g>
+  <circle cx="1280" cy="126" r="12" fill="#3a3a44" stroke="#0a0a12" stroke-width="3.4"/>
+</g>
+<!-- PORTELL detras del mostrador -->
+<g>
+  <!-- cuerpo -->
+  <path d="M 1040 580 L 1062 420 Q 1125 380 1188 420 L 1210 580 Z" fill="#2e4038" stroke="#0a0a12" stroke-width="6" stroke-linejoin="round"/>
+  <path d="M 1062 420 Q 1125 380 1188 420 L 1182 448 Q 1125 414 1068 448 Z" fill="#3d574d" opacity=".9"/>
+  <!-- delantal -->
+  <path d="M 1084 470 L 1166 470 L 1176 580 L 1074 580 Z" fill="#4a3428" stroke="#0a0a12" stroke-width="4" stroke-linejoin="round"/>
+  <rect x="1096" y="500" width="58" height="40" rx="4" fill="#3a2a20" stroke="#0a0a12" stroke-width="3"/>
+  <path d="M 1096 470 q 29 18 58 0" fill="none" stroke="#0a0a12" stroke-width="3.4"/>
+  <!-- camisa y corbata -->
+  <path d="M 1102 418 L 1148 418 L 1125 446 Z" fill="#e8e0cc" stroke="#0a0a12" stroke-width="3.4" stroke-linejoin="round"/>
+  <polygon points="1116,424 1134,424 1125,470" fill="#ff2e88" stroke="#0a0a12" stroke-width="3" stroke-linejoin="round"/>
+  <!-- brazos apoyados -->
+  <path d="M 1050 470 q -34 30 -26 74 l 40 6 q -2 -40 18 -62 Z" fill="#2e4038" stroke="#0a0a12" stroke-width="5" stroke-linejoin="round"/>
+  <path d="M 1200 470 q 34 30 26 74 l -40 6 q 2 -40 -18 -62 Z" fill="#2e4038" stroke="#0a0a12" stroke-width="5" stroke-linejoin="round"/>
+  <!-- cabeza grande caricaturesca -->
+  <g>
+    <ellipse cx="1125" cy="330" rx="78" ry="74" fill="#d9a872" stroke="#0a0a12" stroke-width="6"/>
+    <path d="M 1052 330 q -14 4 -12 20 q 2 14 18 12" fill="#d9a872" stroke="#0a0a12" stroke-width="4"/>
+    <path d="M 1198 330 q 14 4 12 20 q -2 14 -18 12" fill="#d9a872" stroke="#0a0a12" stroke-width="4"/>
+    <!-- calva con pelo gris a los lados -->
+    <path d="M 1052 318 q -6 -52 36 -66 q -30 26 -24 66 Z" fill="#c9c9c9" stroke="#0a0a12" stroke-width="4" stroke-linejoin="round"/>
+    <path d="M 1198 318 q 6 -52 -36 -66 q 30 26 24 66 Z" fill="#c9c9c9" stroke="#0a0a12" stroke-width="4" stroke-linejoin="round"/>
+    <path d="M 1076 268 q 49 -28 98 0 q -49 -14 -98 0 Z" fill="#c9a06a" opacity=".7"/>
+    <!-- cejas pobladas -->
+    <path d="M 1068 308 q 22 -14 44 -4" fill="none" stroke="#8f8f8f" stroke-width="9" stroke-linecap="round"/>
+    <path d="M 1138 304 q 22 -10 44 4" fill="none" stroke="#8f8f8f" stroke-width="9" stroke-linecap="round"/>
+    <!-- gafas redondas -->
+    <circle cx="1092" cy="334" r="24" fill="#cfefff" fill-opacity=".14" stroke="#14111c" stroke-width="5"/>
+    <circle cx="1158" cy="334" r="24" fill="#cfefff" fill-opacity=".14" stroke="#14111c" stroke-width="5"/>
+    <line x1="1116" y1="334" x2="1134" y2="334" stroke="#14111c" stroke-width="5"/>
+    <line x1="1068" y1="330" x2="1050" y2="324" stroke="#14111c" stroke-width="4"/>
+    <line x1="1182" y1="330" x2="1200" y2="324" stroke="#14111c" stroke-width="4"/>
+    <polygon points="1078,322 1092,318 1084,330" fill="#ffffff" opacity=".6"/>
+    <!-- ojos con parpadeo -->
+    <g class="eyesP">
+      <circle cx="1092" cy="336" r="6" fill="#14111c"/>
+      <circle cx="1158" cy="336" r="6" fill="#14111c"/>
+    </g>
+    <!-- nariz -->
+    <path d="M 1125 340 q -8 16 -2 24 q 6 6 14 2" fill="none" stroke="#0a0a12" stroke-width="4" stroke-linecap="round"/>
+    <!-- bigote y sonrisa -->
+    <path d="M 1096 378 q 14 -12 29 -2 q 15 -10 29 2 q -6 16 -29 12 q -23 4 -29 -12 Z" fill="#c9c9c9" stroke="#0a0a12" stroke-width="4" stroke-linejoin="round"/>
+    <path d="M 1108 392 q 17 10 34 0" fill="none" stroke="#0a0a12" stroke-width="4" stroke-linecap="round"/>
+  </g>
 </g>
 <!-- mostrador -->
 <g>
-  <polygon points="700,560 1440,560 1490,720 650,720" fill="#2b2333"/>
-  <polygon points="650,720 1490,720 1490,760 650,760" fill="#1c1722"/>
-  <line x1="700" y1="560" x2="1440" y2="560" stroke="#2de2ff" stroke-width="3" filter="url(#neonC)"/>
-  <!-- radio de válvulas -->
-  <g transform="translate(1260,486)">
-    <rect width="120" height="74" rx="8" fill="#241c30" stroke="#14111c" stroke-width="4"/>
-    <circle cx="30" cy="37" r="20" fill="#0b0b10"/>
-    <circle cx="30" cy="37" r="12" fill="#e8a33d" opacity=".85"/>
-    <rect x="60" y="18" width="46" height="14" rx="3" fill="#0b0b10"/>
-    <rect x="62" y="21" width="30" height="8" rx="2" fill="#ffd76a" opacity=".8"/>
-    <circle cx="70" cy="48" r="7" fill="#0b0b10"/><circle cx="94" cy="48" r="7" fill="#0b0b10"/>
-  </g>
+  <polygon points="700,580 1440,580 1496,740 646,740" fill="url(#counterG)" stroke="#0a0a12" stroke-width="6" stroke-linejoin="round"/>
+  <polygon points="700,580 1440,580 1452,606 688,606" fill="#5a4260" opacity=".8"/>
+  <polygon points="646,740 1496,740 1496,786 646,786" fill="#241a2c" stroke="#0a0a12" stroke-width="5"/>
+  <line x1="700" y1="580" x2="1440" y2="580" stroke="#2de2ff" stroke-width="3" filter="url(#neonC)"/>
   <!-- vitrina de cristales -->
-  <g transform="translate(760,500)">
-    <polygon points="0,60 180,60 170,0 10,0" fill="#0a1210" stroke="#26262e" stroke-width="4"/>
-    ${Array.from({length:4},(_,i)=>`<rect x="${24+i*36}" y="20" width="22" height="14" rx="3" fill="#59d98c" opacity="${.35+i*.12}"/>`).join('')}
-    <text x="90" y="82" fill="#b9b4a4" font-size="12" letter-spacing="2" text-anchor="middle" opacity=".7">CRISTALLS DE QUARS</text>
+  <g transform="translate(760,498)">
+    <polygon points="0,64 190,64 178,0 12,0" fill="#0c1a14" stroke="#0a0a12" stroke-width="5" stroke-linejoin="round"/>
+    <polygon points="10,10 60,10 40,58 4,58" fill="#cfefff" opacity=".1"/>
+    ${Array.from({length:4},(_,i)=>`<rect x="${26+i*38}" y="24" width="24" height="16" rx="3" fill="#59d98c" opacity="${.4+i*.13}" stroke="#0a0a12" stroke-width="2"/>`).join('')}
+    <text x="95" y="86" fill="#b9b4a4" font-size="12" letter-spacing="2" text-anchor="middle" opacity=".75">CRISTALLS DE QUARS</text>
   </g>
+  <!-- soldador con vapor -->
+  <g transform="translate(986,540)">
+    <rect x="-10" y="26" width="70" height="12" rx="4" fill="#241c30" stroke="#0a0a12" stroke-width="3"/>
+    <path d="M 4 28 L 14 4 L 24 6 L 16 30 Z" fill="#b43a4e" stroke="#0a0a12" stroke-width="3" stroke-linejoin="round"/>
+    <line x1="22" y1="6" x2="34" y2="-6" stroke="#c9bda3" stroke-width="3.4" stroke-linecap="round"/>
+    <path class="steam" d="M 36 -10 q -6 -12 2 -18 q 7 -6 2 -16" fill="none" stroke="#8a8aa0" stroke-width="2.8" stroke-linecap="round" opacity=".6"/>
+    <circle cx="0" cy="32" r="3" fill="#ff5a4e"><animate attributeName="opacity" values="1;.2;1" dur="1.8s" repeatCount="indefinite"/></circle>
+  </g>
+  <!-- radio de valvulas -->
+  <g transform="translate(1260,486)">
+    <rect width="126" height="80" rx="10" fill="#2e2138" stroke="#0a0a12" stroke-width="5"/>
+    <rect x="6" y="6" width="114" height="68" rx="6" fill="#241c30"/>
+    <circle cx="34" cy="40" r="22" fill="#0b0b10" stroke="#0a0a12" stroke-width="3"/>
+    <circle cx="34" cy="40" r="13" fill="#e8a33d" opacity=".9">
+      <animate attributeName="opacity" values=".9;.55;.9" dur="3s" repeatCount="indefinite"/>
+    </circle>
+    <rect x="64" y="18" width="50" height="16" rx="3" fill="#0b0b10" stroke="#0a0a12" stroke-width="2.4"/>
+    <rect x="66" y="21" width="32" height="9" rx="2" fill="#ffd76a" opacity=".85"/>
+    <circle cx="74" cy="54" r="8" fill="#0b0b10" stroke="#0a0a12" stroke-width="2.6"/>
+    <circle cx="100" cy="54" r="8" fill="#0b0b10" stroke="#0a0a12" stroke-width="2.6"/>
+    <path d="M 10 -2 L 60 -26" stroke="#0a0a12" stroke-width="3.4" stroke-linecap="round"/>
+  </g>
+  <!-- catalogo y calculadora -->
+  <g transform="translate(700,520) rotate(-3)">
+    <rect width="56" height="70" rx="3" fill="#5a3a7b" stroke="#0a0a12" stroke-width="3.4"/>
+    <text x="28" y="30" fill="#efe6cc" font-size="10" text-anchor="middle">CAT.</text>
+    <text x="28" y="46" fill="#efe6cc" font-size="10" text-anchor="middle">1987</text>
+  </g>
+</g>
+<!-- carretes en el suelo -->
+<g>
+  <circle cx="360" cy="800" r="46" fill="#4a3428" stroke="#0a0a12" stroke-width="5"/>
+  <circle cx="360" cy="800" r="16" fill="#241a20" stroke="#0a0a12" stroke-width="4"/>
+  <path d="M 360 754 q 60 10 88 60" fill="none" stroke="#0d0a10" stroke-width="7" stroke-linecap="round"/>
+  <path d="M 360 754 q 60 10 88 60" fill="none" stroke="#26262e" stroke-width="3.6" stroke-linecap="round"/>
 </g>
 <!-- salida -->
 <g>
-  <polygon points="30,770 200,770 180,830 30,830" fill="#12101c" stroke="#2de2ff" stroke-width="2"/>
+  <polygon points="30,770 200,770 180,830 30,830" fill="#12101c" stroke="#0a0a12" stroke-width="4"/>
+  <polygon points="30,770 200,770 180,830 30,830" fill="none" stroke="#2de2ff" stroke-width="2" filter="url(#neonC)"/>
   <text x="112" y="808" fill="#2de2ff" font-size="22" letter-spacing="3" text-anchor="middle" filter="url(#neonC)">← CARRER</text>
 </g>
+<!-- primer plano: borde de estanteria -->
+<path d="M 0 900 L 0 600 L 44 584 L 60 900 Z" fill="#08070c"/>
+<path d="M 0 900 L 0 600 L 44 584 L 60 900 Z" fill="none" stroke="#050408" stroke-width="4"/>
 <!-- HOTSPOTS -->
 <g id="hotspots">
-  <rect class="hs hs-pulse" data-hs="portell"      x="1000" y="250" width="250" height="310"/>
+  <rect class="hs hs-pulse" data-hs="portell"      x="1010" y="250" width="240" height="330"/>
   <rect class="hs hs-pulse" data-hs="cajones"      x="80"   y="140" width="520" height="540"/>
-  <rect class="hs hs-pulse" data-hs="cristales"    x="750"  y="490" width="200" height="110"/>
-  <rect class="hs hs-pulse" data-hs="radio"        x="1250" y="480" width="140" height="90"/>
+  <rect class="hs hs-pulse" data-hs="cristales"    x="750"  y="486" width="210" height="120"/>
+  <rect class="hs hs-pulse" data-hs="radio"        x="1250" y="472" width="146" height="104"/>
   <rect class="hs hs-pulse" data-hs="a_calle"      x="24"   y="762" width="186" height="76"/>
 </g>
 </svg>`;
 }
-
 function svgDeposito(doorsOpen){
-  /* rejilla en perspectiva hasta un punto de fuga central */
   let grid='';
   for(let i=0;i<=16;i++){
     const x=i*100;
-    grid+=`<line x1="800" y1="470" x2="${x*2-800}" y2="900" stroke="#ff2e88" stroke-width="1.6" opacity=".3"/>`;
+    grid+=`<line x1="800" y1="470" x2="${x*2-800}" y2="900" stroke="#ff2e88" stroke-width="2.4" opacity=".38"/>`;
   }
   for(let i=0;i<9;i++){
     const y=470+Math.pow(i/8,1.8)*430;
-    grid+=`<line x1="0" y1="${y}" x2="1600" y2="${y}" stroke="#ff2e88" stroke-width="1.6" opacity="${.15+i*.03}"/>`;
+    grid+=`<line x1="0" y1="${y}" x2="1600" y2="${y}" stroke="#ff2e88" stroke-width="2.4" opacity="${.2+i*.04}"/>`;
   }
 return `<svg viewBox="0 0 1600 900" preserveAspectRatio="xMidYMid slice">
 <defs>
   <linearGradient id="vaultBg" x1="0" y1="0" x2="0" y2="1">
-    <stop offset="0" stop-color="#0b0b14"/><stop offset="1" stop-color="#0b0b10"/>
+    <stop offset="0" stop-color="#141126"/><stop offset="1" stop-color="#0b0b14"/>
   </linearGradient>
   <linearGradient id="sunV" x1="0" y1="0" x2="0" y2="1">
     <stop offset="0" stop-color="#ffd76a"/><stop offset=".5" stop-color="#ff2e88"/><stop offset="1" stop-color="#8a4bff"/>
   </linearGradient>
+  <radialGradient id="sunHalo" cx=".5" cy=".5" r=".5">
+    <stop offset="0" stop-color="#ff2e88" stop-opacity=".45"/><stop offset="1" stop-color="#ff2e88" stop-opacity="0"/>
+  </radialGradient>
+  <linearGradient id="beamG" x1="0" y1="0" x2="0" y2="1">
+    <stop offset="0" stop-color="#e8a33d" stop-opacity=".3"/><stop offset="1" stop-color="#e8a33d" stop-opacity="0"/>
+  </linearGradient>
+  <linearGradient id="doorG" x1="0" y1="0" x2="0" y2="1">
+    <stop offset="0" stop-color="#1c1830"/><stop offset="1" stop-color="#0e0d16"/>
+  </linearGradient>
   ${NEON_DEFS}
 </defs>
 <rect width="1600" height="900" fill="url(#vaultBg)"/>
+<!-- estrellas tenues -->
+<g fill="#f0e9d8">
+  ${Array.from({length:16},(_,i)=>`<circle cx="${(i*211)%1600}" cy="${24+(i*97)%300}" r="${1+(i%3)*.6}" opacity="${.2+(i%4)*.1}"/>`).join('')}
+</g>
+<!-- sol rayado con halo -->
+<circle cx="800" cy="420" r="260" fill="url(#sunHalo)"/>
+<circle cx="800" cy="420" r="168" fill="url(#sunV)"/>
+<g fill="#0e0d1c">
+  ${Array.from({length:7},(_,i)=>`<rect x="616" y="${438+i*17}" width="368" height="${4+i*3.2}"/>`).join('')}
+</g>
+<circle cx="800" cy="420" r="168" fill="none" stroke="#0a0a12" stroke-width="6"/>
+<!-- rejilla en perspectiva -->
 ${grid}
-<!-- sol rayado tras el dintel -->
+<!-- reflejo del sol en el suelo -->
+<polygon points="760,470 840,470 900,900 700,900" fill="#ff2e88" opacity=".12"/>
+<!-- paredes laterales con tuberias -->
 <g>
-  <circle cx="800" cy="430" r="150" fill="url(#sunV)" opacity=".85"/>
-  <g fill="#0b0b14">
-    ${Array.from({length:6},(_,i)=>`<rect x="636" y="${452+i*16}" width="328" height="${4+i*3}"/>`).join('')}
+  <rect x="0" y="0" width="180" height="900" fill="#100e1c"/>
+  <rect x="1420" y="0" width="180" height="900" fill="#100e1c"/>
+  <g stroke="#0a0a12" stroke-width="4">
+    <path d="M 60 0 V 900" fill="none" stroke="#241d33" stroke-width="14"/>
+    <path d="M 110 0 V 900" fill="none" stroke="#1c2b33" stroke-width="10"/>
+    <path d="M 1490 0 V 900" fill="none" stroke="#241d33" stroke-width="14"/>
+    <path d="M 1540 0 V 900" fill="none" stroke="#1c2b33" stroke-width="10"/>
+  </g>
+  <g fill="#3a3044" stroke="#0a0a12" stroke-width="3">
+    <rect x="46" y="200" width="42" height="18" rx="6"/><rect x="46" y="520" width="42" height="18" rx="6"/>
+    <rect x="1476" y="260" width="42" height="18" rx="6"/><rect x="1476" y="600" width="42" height="18" rx="6"/>
   </g>
 </g>
-<!-- dintel monolítico con marco de neón -->
+<!-- paneles de control parpadeantes -->
 <g>
-  <rect x="560" y="470" width="480" height="330" fill="#0e0d16"/>
-  <rect x="560" y="470" width="480" height="330" fill="none" stroke="#2de2ff" stroke-width="4" filter="url(#neonC)"/>
-  ${Array.from({length:6},(_,i)=>`<rect x="588" y="${500+i*46}" width="424" height="8" fill="#2de2ff" opacity="${.25+i*.06}"/>`).join('')}
+  <rect x="220" y="330" width="120" height="170" rx="8" fill="#17131f" stroke="#0a0a12" stroke-width="5"/>
+  ${Array.from({length:4},(_,r)=>Array.from({length:3},(_,c)=>`<circle cx="${252+c*34}" cy="${362+r*38}" r="7" fill="${['#ff2e88','#2de2ff','#59d98c'][(r+c)%3]}" opacity="${.3+((r*3+c)%4)*.2}"><animate attributeName="opacity" values="${.3+((r*3+c)%4)*.2};.15;${.3+((r*3+c)%4)*.2}" dur="${1.4+((r+c)%3)*.7}s" repeatCount="indefinite"/></circle>`).join('')).join('')}
+  <rect x="1260" y="330" width="120" height="170" rx="8" fill="#17131f" stroke="#0a0a12" stroke-width="5"/>
+  ${Array.from({length:4},(_,r)=>Array.from({length:3},(_,c)=>`<circle cx="${1292+c*34}" cy="${362+r*38}" r="7" fill="${['#2de2ff','#59d98c','#ff2e88'][(r+c)%3]}" opacity="${.3+((r*2+c)%4)*.2}"><animate attributeName="opacity" values="${.3+((r*2+c)%4)*.2};.15;${.3+((r*2+c)%4)*.2}" dur="${1.1+((r+c)%3)*.8}s" repeatCount="indefinite"/></circle>`).join('')).join('')}
 </g>
-<!-- haz de luz sobre el atril -->
-<polygon points="770,120 830,120 900,880 700,880" fill="#e8a33d" opacity=".10"/>
+<!-- dintel monolitico -->
+<g>
+  <rect x="552" y="462" width="496" height="344" rx="10" fill="url(#doorG)" stroke="#0a0a12" stroke-width="8"/>
+  <rect x="552" y="462" width="496" height="344" rx="10" fill="none" stroke="#2de2ff" stroke-width="4" filter="url(#neonC)"/>
+  ${Array.from({length:6},(_,i)=>`<rect x="584" y="${496+i*48}" width="432" height="10" rx="5" fill="#2de2ff" opacity="${.22+i*.06}"/>`).join('')}
+  <g fill="#3a3044" stroke="#0a0a12" stroke-width="2.6">
+    ${Array.from({length:8},(_,i)=>`<circle cx="${580+i*62}" cy="478" r="6"/>`).join('')}
+    ${Array.from({length:8},(_,i)=>`<circle cx="${580+i*62}" cy="790" r="6"/>`).join('')}
+  </g>
+  <!-- franja de advertencia -->
+  <g>
+    <rect x="552" y="806" width="496" height="22" fill="#e8a33d"/>
+    <g fill="#0b0b10">
+      ${Array.from({length:12},(_,i)=>`<polygon points="${560+i*42},806 ${580+i*42},806 ${568+i*42},828 ${548+i*42},828"/>`).join('')}
+    </g>
+    <rect x="552" y="806" width="496" height="22" fill="none" stroke="#0a0a12" stroke-width="4"/>
+  </g>
+</g>
+<!-- haz de luz cenital -->
+<polygon points="764,60 836,60 906,880 694,880" fill="url(#beamG)"/>
+<g fill="#ffd76a">
+  <circle class="mote m1" cx="780" cy="260" r="3"/>
+  <circle class="mote m2" cx="830" cy="380" r="2.4"/>
+  <circle class="mote m3" cx="796" cy="520" r="2.8"/>
+  <circle class="mote m4" cx="846" cy="640" r="2.2"/>
+</g>
+<!-- cables serpenteando al atril -->
+<path d="M 240 860 Q 420 780 560 840 T 740 820" fill="none" stroke="#0d0a10" stroke-width="10" stroke-linecap="round"/>
+<path d="M 240 860 Q 420 780 560 840 T 740 820" fill="none" stroke="#26262e" stroke-width="5" stroke-linecap="round"/>
+<path d="M 1360 860 Q 1180 790 1040 840 T 880 826" fill="none" stroke="#0d0a10" stroke-width="10" stroke-linecap="round"/>
+<path d="M 1360 860 Q 1180 790 1040 840 T 880 826" fill="none" stroke="#26262e" stroke-width="5" stroke-linecap="round"/>
 <!-- atril con la cinta -->
 <g>
-  <polygon points="760,760 840,760 900,880 700,880" fill="#17141f" stroke="#33293d" stroke-width="4"/>
-  <polygon points="740,720 860,720 840,760 760,760" fill="#2b2333" stroke="#33293d" stroke-width="4"/>
-  <g transform="translate(748,646)">
-    <rect width="104" height="64" rx="6" fill="#d8cba8" stroke="#8f8266" stroke-width="3"/>
-    <rect x="12" y="10" width="80" height="26" rx="3" fill="#0b0b10"/>
-    <circle cx="34" cy="23" r="9" fill="none" stroke="#d8cba8" stroke-width="3"/>
-    <circle cx="70" cy="23" r="9" fill="none" stroke="#d8cba8" stroke-width="3"/>
-    <path d="M 8 46 L 96 46 L 88 62 L 16 62 Z" fill="#0b0b10" opacity=".85"/>
+  <ellipse cx="800" cy="876" rx="130" ry="16" fill="#05040a" opacity=".8"/>
+  <polygon points="762,756 838,756 906,880 694,880" fill="#1c1722" stroke="#0a0a12" stroke-width="6" stroke-linejoin="round"/>
+  <polygon points="762,756 838,756 906,880 694,880" fill="#2de2ff" opacity=".05"/>
+  <polygon points="736,712 864,712 840,756 760,756" fill="#31243d" stroke="#0a0a12" stroke-width="5" stroke-linejoin="round"/>
+  <polygon points="736,712 864,712 856,726 744,726" fill="#4a3a5e" opacity=".9"/>
+  <g transform="translate(744,636)">
+    <rect width="112" height="70" rx="8" fill="#d8cba8" stroke="#0a0a12" stroke-width="4"/>
+    <rect x="12" y="10" width="88" height="30" rx="3" fill="#0b0b10" stroke="#0a0a12" stroke-width="2.4"/>
+    <g class="reelS"><circle cx="36" cy="25" r="10" fill="none" stroke="#d8cba8" stroke-width="3.4"/><line x1="36" y1="16" x2="36" y2="34" stroke="#d8cba8" stroke-width="2.6"/></g>
+    <g class="reelS"><circle cx="76" cy="25" r="10" fill="none" stroke="#d8cba8" stroke-width="3.4"/><line x1="76" y1="16" x2="76" y2="34" stroke="#d8cba8" stroke-width="2.6"/></g>
+    <path d="M 8 50 L 104 50 L 95 68 L 17 68 Z" fill="#0b0b10" opacity=".85"/>
   </g>
-  <text x="800" y="632" fill="#2de2ff" font-size="19" letter-spacing="6" text-anchor="middle" filter="url(#neonC)">EL PRIORATO DE LA CULPA</text>
-  <text x="800" y="606" fill="#ff2e88" font-size="14" letter-spacing="6" text-anchor="middle" filter="url(#neonP)">DEPÒSIT ZERO</text>
+  <text x="800" y="620" fill="#2de2ff" font-size="20" letter-spacing="6" text-anchor="middle" filter="url(#neonC)">EL PRIORATO DE LA CULPA</text>
+  <text x="800" y="592" fill="#ff2e88" font-size="15" letter-spacing="6" text-anchor="middle" filter="url(#neonP)">DEPÒSIT ZERO</text>
 </g>
 ${doorsOpen?`
-<!-- dos puertas: dos hipótesis -->
+<!-- dos puertas: dos hipotesis -->
 <g>
-  <rect x="300" y="480" width="180" height="320" fill="#0e0d16" stroke="#ff2e88" stroke-width="3" filter="url(#neonP)"/>
-  <rect x="330" y="530" width="120" height="8" fill="#ff2e88" opacity=".7"/>
-  <text x="390" y="850" fill="#ff2e88" font-size="17" letter-spacing="3" text-anchor="middle" filter="url(#neonP)">LA MÀ DE L'ALTRE</text>
-  <rect x="1120" y="480" width="180" height="320" fill="#0e0d16" stroke="#2de2ff" stroke-width="3" filter="url(#neonC)"/>
-  <rect x="1150" y="530" width="120" height="8" fill="#2de2ff" opacity=".7"/>
-  <text x="1210" y="850" fill="#2de2ff" font-size="17" letter-spacing="3" text-anchor="middle" filter="url(#neonC)">LA MEVA MÀ</text>
+  <ellipse cx="390" cy="816" rx="130" ry="14" fill="#05040a" opacity=".8"/>
+  <rect x="292" y="472" width="196" height="336" rx="8" fill="url(#doorG)" stroke="#0a0a12" stroke-width="7"/>
+  <rect x="292" y="472" width="196" height="336" rx="8" fill="none" stroke="#ff2e88" stroke-width="4" filter="url(#neonP)"/>
+  <rect x="322" y="506" width="136" height="120" rx="6" fill="#0b0b12" stroke="#ff2e88" stroke-opacity=".5" stroke-width="3"/>
+  <path d="M 352 566 q 20 -34 40 0 q 20 30 36 -8" fill="none" stroke="#ff2e88" stroke-width="5" stroke-linecap="round" filter="url(#neonP)"/>
+  <circle cx="390" cy="690" r="16" fill="#ff2e88" opacity=".8"/>
+  <circle cx="390" cy="690" r="16" fill="none" stroke="#0a0a12" stroke-width="4"/>
+  <rect x="330" y="742" width="120" height="10" rx="5" fill="#ff2e88" opacity=".6"/>
+  <text x="390" y="856" fill="#ff2e88" font-size="18" letter-spacing="3" text-anchor="middle" filter="url(#neonP)">LA MÀ DE L'ALTRE</text>
+  <ellipse cx="1210" cy="816" rx="130" ry="14" fill="#05040a" opacity=".8"/>
+  <rect x="1112" y="472" width="196" height="336" rx="8" fill="url(#doorG)" stroke="#0a0a12" stroke-width="7"/>
+  <rect x="1112" y="472" width="196" height="336" rx="8" fill="none" stroke="#2de2ff" stroke-width="4" filter="url(#neonC)"/>
+  <rect x="1142" y="506" width="136" height="120" rx="6" fill="#0b0b12" stroke="#2de2ff" stroke-opacity=".5" stroke-width="3"/>
+  <path d="M 1172 566 q 20 -34 40 0 q 20 30 36 -8" fill="none" stroke="#2de2ff" stroke-width="5" stroke-linecap="round" filter="url(#neonC)"/>
+  <circle cx="1210" cy="690" r="16" fill="#2de2ff" opacity=".8"/>
+  <circle cx="1210" cy="690" r="16" fill="none" stroke="#0a0a12" stroke-width="4"/>
+  <rect x="1150" y="742" width="120" height="10" rx="5" fill="#2de2ff" opacity=".6"/>
+  <text x="1210" y="856" fill="#2de2ff" font-size="18" letter-spacing="3" text-anchor="middle" filter="url(#neonC)">LA MEVA MÀ</text>
 </g>`:''}
 <!-- HOTSPOTS -->
 <g id="hotspots">
-  <rect class="hs hs-pulse" data-hs="missatge" x="700" y="600" width="200" height="180"/>
-  ${doorsOpen?`<rect class="hs hs-pulse" data-hs="porta_altre" x="300" y="470" width="180" height="380"/>
-  <rect class="hs hs-pulse" data-hs="porta_meua" x="1120" y="470" width="180" height="380"/>`:''}
+  <rect class="hs hs-pulse" data-hs="missatge" x="700" y="590" width="200" height="200"/>
+  ${doorsOpen?`<rect class="hs hs-pulse" data-hs="porta_altre" x="286" y="462" width="208" height="400"/>
+  <rect class="hs hs-pulse" data-hs="porta_meua" x="1106" y="462" width="208" height="400"/>`:''}
 </g>
 </svg>`;
 }
-
 /* ============================ RETRATOS ============================ */
 function portraitNicolau(){
-return `<svg viewBox="0 0 100 100"><rect width="100" height="100" fill="#12121c"/>
-<path d="M 20 100 L 26 66 Q 50 52 74 66 L 80 100 Z" fill="#232c38"/>
-<circle cx="50" cy="44" r="24" fill="#c9a06a"/>
-<path d="M 28 40 Q 50 16 72 40 L 72 30 Q 50 8 28 30 Z" fill="#1a1726"/>
-<rect x="20" y="26" width="60" height="7" rx="3" fill="#1a1726"/>
-<rect x="36" y="42" width="12" height="9" rx="2" fill="none" stroke="#14111c" stroke-width="2.4"/>
-<rect x="54" y="42" width="12" height="9" rx="2" fill="none" stroke="#14111c" stroke-width="2.4"/>
-<line x1="48" y1="46" x2="54" y2="46" stroke="#14111c" stroke-width="2.4"/>
-<path d="M 42 62 Q 50 66 58 62" fill="none" stroke="#14111c" stroke-width="2.6"/>
-<polygon points="40,72 60,72 50,84" fill="#ff2e88" opacity=".9"/>
+return `<svg viewBox="0 0 120 120"><rect width="120" height="120" fill="#12121c"/>
+<rect width="120" height="120" fill="#2de2ff" opacity=".05"/>
+<path d="M 22 120 L 30 82 Q 60 66 90 82 L 98 120 Z" fill="#232c38" stroke="#0a0a12" stroke-width="4" stroke-linejoin="round"/>
+<path d="M 44 78 L 60 92 L 76 78 L 70 74 L 60 82 L 50 74 Z" fill="#e8e0cc" stroke="#0a0a12" stroke-width="3" stroke-linejoin="round"/>
+<polygon points="54,86 66,86 60,106" fill="#ff2e88" stroke="#0a0a12" stroke-width="2.6" stroke-linejoin="round"/>
+<ellipse cx="60" cy="50" rx="32" ry="30" fill="#d9a872" stroke="#0a0a12" stroke-width="4"/>
+<path d="M 28 52 q -10 2 -8 12 q 2 9 12 7" fill="#d9a872" stroke="#0a0a12" stroke-width="3"/>
+<path d="M 92 52 q 10 2 8 12 q -2 9 -12 7" fill="#d9a872" stroke="#0a0a12" stroke-width="3"/>
+<path d="M 28 46 Q 32 16 60 14 Q 90 16 92 46 Q 80 30 60 30 Q 40 30 28 46 Z" fill="#241d2e" stroke="#0a0a12" stroke-width="3.6" stroke-linejoin="round"/>
+<path d="M 36 40 q 10 -8 20 -6" fill="none" stroke="#0a0a12" stroke-width="4" stroke-linecap="round"/>
+<path d="M 64 34 q 10 -2 20 6" fill="none" stroke="#0a0a12" stroke-width="4" stroke-linecap="round"/>
+<rect x="34" y="46" width="22" height="15" rx="4" fill="#cfefff" fill-opacity=".12" stroke="#14111c" stroke-width="3.4"/>
+<rect x="64" y="46" width="22" height="15" rx="4" fill="#cfefff" fill-opacity=".12" stroke="#14111c" stroke-width="3.4"/>
+<line x1="56" y1="52" x2="64" y2="52" stroke="#14111c" stroke-width="3.4"/>
+<polygon points="38,49 48,47 42,55" fill="#ffffff" opacity=".55"/>
+<polygon points="68,49 78,47 72,55" fill="#ffffff" opacity=".55"/>
+<g class="eyesN">
+  <circle cx="45" cy="54" r="3.4" fill="#14111c"/>
+  <circle cx="75" cy="54" r="3.4" fill="#14111c"/>
+</g>
+<path d="M 60 56 q -4 8 0 12" fill="none" stroke="#0a0a12" stroke-width="3" stroke-linecap="round"/>
+<path d="M 48 74 Q 60 80 72 74" fill="none" stroke="#0a0a12" stroke-width="3.4" stroke-linecap="round"/>
 </svg>`;
 }
 function portraitPortell(){
-return `<svg viewBox="0 0 100 100"><rect width="100" height="100" fill="#12121c"/>
-<path d="M 24 100 L 30 70 Q 50 58 70 70 L 76 100 Z" fill="#1d2b26"/>
-<circle cx="50" cy="44" r="24" fill="#c9a06a"/>
-<path d="M 27 42 Q 50 22 73 42 L 73 34 Q 50 12 27 34 Z" fill="#d8cba8" opacity=".25"/>
-<circle cx="40" cy="44" r="7" fill="none" stroke="#14111c" stroke-width="2.4"/>
-<circle cx="60" cy="44" r="7" fill="none" stroke="#14111c" stroke-width="2.4"/>
-<line x1="47" y1="44" x2="53" y2="44" stroke="#14111c" stroke-width="2.4"/>
-<path d="M 38 58 Q 50 68 62 58" fill="none" stroke="#14111c" stroke-width="3"/>
-<path d="M 40 60 Q 50 74 60 60" fill="#d8cba8" opacity=".85"/>
-<polygon points="42,74 58,74 50,82" fill="#ff2e88"/>
+return `<svg viewBox="0 0 120 120"><rect width="120" height="120" fill="#12121c"/>
+<rect width="120" height="120" fill="#ff2e88" opacity=".05"/>
+<path d="M 26 120 L 34 86 Q 60 72 86 86 L 94 120 Z" fill="#2e4038" stroke="#0a0a12" stroke-width="4" stroke-linejoin="round"/>
+<path d="M 46 84 L 74 84 L 78 120 L 42 120 Z" fill="#4a3428" stroke="#0a0a12" stroke-width="3" stroke-linejoin="round"/>
+<path d="M 48 82 L 60 92 L 72 82 L 66 78 L 60 84 L 54 78 Z" fill="#e8e0cc" stroke="#0a0a12" stroke-width="3" stroke-linejoin="round"/>
+<polygon points="55,88 65,88 60,104" fill="#ff2e88" stroke="#0a0a12" stroke-width="2.6" stroke-linejoin="round"/>
+<ellipse cx="60" cy="50" rx="33" ry="31" fill="#d9a872" stroke="#0a0a12" stroke-width="4"/>
+<path d="M 27 50 q -10 2 -8 12 q 2 9 12 7" fill="#d9a872" stroke="#0a0a12" stroke-width="3"/>
+<path d="M 93 50 q 10 2 8 12 q -2 9 -12 7" fill="#d9a872" stroke="#0a0a12" stroke-width="3"/>
+<path d="M 28 44 q -6 -26 18 -32 q -14 14 -10 32 Z" fill="#c9c9c9" stroke="#0a0a12" stroke-width="3.4" stroke-linejoin="round"/>
+<path d="M 92 44 q 6 -26 -18 -32 q 14 14 10 32 Z" fill="#c9c9c9" stroke="#0a0a12" stroke-width="3.4" stroke-linejoin="round"/>
+<path d="M 34 36 q 12 -8 22 -4" fill="none" stroke="#8f8f8f" stroke-width="6" stroke-linecap="round"/>
+<path d="M 64 32 q 12 -4 22 4" fill="none" stroke="#8f8f8f" stroke-width="6" stroke-linecap="round"/>
+<circle cx="45" cy="50" r="12" fill="#cfefff" fill-opacity=".14" stroke="#14111c" stroke-width="3.4"/>
+<circle cx="75" cy="50" r="12" fill="#cfefff" fill-opacity=".14" stroke="#14111c" stroke-width="3.4"/>
+<line x1="57" y1="50" x2="63" y2="50" stroke="#14111c" stroke-width="3.4"/>
+<polygon points="39,44 47,42 42,50" fill="#ffffff" opacity=".55"/>
+<g class="eyesP2">
+  <circle cx="45" cy="51" r="3.2" fill="#14111c"/>
+  <circle cx="75" cy="51" r="3.2" fill="#14111c"/>
+</g>
+<path d="M 60 54 q -4 8 0 11" fill="none" stroke="#0a0a12" stroke-width="3" stroke-linecap="round"/>
+<path d="M 42 72 q 9 -8 18 -2 q 9 -6 18 2 q -4 12 -18 9 q -14 3 -18 -9 Z" fill="#c9c9c9" stroke="#0a0a12" stroke-width="3.4" stroke-linejoin="round"/>
+<path d="M 50 80 q 10 6 20 0" fill="none" stroke="#0a0a12" stroke-width="3" stroke-linecap="round"/>
 </svg>`;
 }
-
 /* ============================ ICONOS DE INVENTARIO ============================ */
 const ICONS = {
   cinta:`<svg viewBox="0 0 48 48"><rect x="3" y="8" width="42" height="32" rx="4" fill="#d8cba8" stroke="#8f8266" stroke-width="2"/><rect x="9" y="13" width="30" height="11" rx="2" fill="#0b0b10"/><circle cx="17" cy="18.5" r="3.4" fill="none" stroke="#d8cba8" stroke-width="1.6"/><circle cx="31" cy="18.5" r="3.4" fill="none" stroke="#d8cba8" stroke-width="1.6"/><path d="M 8 28 L 40 28 L 37 38 L 11 38 Z" fill="#0b0b10" opacity=".85"/></svg>`,
@@ -936,20 +1448,52 @@ renderScene = function(){
 
 /* ============================ NICOLAU CAMINANTE ============================ */
 function svgNicolauWalk(){
-return `<svg viewBox="0 0 100 210">
+return `<svg viewBox="0 0 120 240">
 <g class="fig">
-  <g class="legB"><rect x="56" y="150" width="12" height="52" rx="5" fill="#14121c"/><rect x="52" y="196" width="20" height="10" rx="4" fill="#0d0c13"/></g>
-  <g class="legA"><rect x="34" y="150" width="12" height="52" rx="5" fill="#14121c"/><rect x="30" y="196" width="20" height="10" rx="4" fill="#0d0c13"/></g>
-  <path d="M 28 78 Q 50 66 72 78 L 78 158 Q 50 172 22 158 Z" fill="#1d1a28" stroke="#2de2ff" stroke-opacity=".28" stroke-width="2"/>
-  <path d="M 28 82 Q 16 108 24 136" fill="none" stroke="#1d1a28" stroke-width="10" stroke-linecap="round"/>
-  <path d="M 72 82 Q 84 108 76 136" fill="none" stroke="#1d1a28" stroke-width="10" stroke-linecap="round"/>
-  <polygon points="38,80 62,80 50,104" fill="#ff2e88"/>
-  <path d="M 60 82 L 74 120 L 66 124 L 56 88 Z" fill="#d11e6e"/>
-  <circle cx="50" cy="52" r="24" fill="#c9a06a"/>
-  <path d="M 27 46 Q 50 22 73 46 L 73 38 Q 50 12 27 38 Z" fill="#171420"/>
-  <circle cx="41" cy="54" r="7" fill="none" stroke="#0d0c13" stroke-width="2.6"/>
-  <circle cx="59" cy="54" r="7" fill="none" stroke="#0d0c13" stroke-width="2.6"/>
-  <line x1="48" y1="54" x2="52" y2="54" stroke="#0d0c13" stroke-width="2.6"/>
+  <g class="legB">
+    <path d="M 66 148 L 78 148 L 80 210 L 64 210 Z" fill="#1a1626" stroke="#0a0a12" stroke-width="4" stroke-linejoin="round"/>
+    <path d="M 62 206 L 86 206 Q 94 210 92 220 L 92 224 L 62 224 Z" fill="#0d0c13" stroke="#0a0a12" stroke-width="4" stroke-linejoin="round"/>
+  </g>
+  <g class="legA">
+    <path d="M 40 148 L 54 148 L 56 210 L 38 210 Z" fill="#241f33" stroke="#0a0a12" stroke-width="4" stroke-linejoin="round"/>
+    <path d="M 34 206 L 60 206 Q 68 210 66 220 L 66 224 L 34 224 Z" fill="#131019" stroke="#0a0a12" stroke-width="4" stroke-linejoin="round"/>
+  </g>
+  <g class="armB">
+    <path d="M 84 92 Q 100 112 94 148 Q 92 158 84 156 Q 78 154 80 144 Q 84 118 74 100 Z" fill="#1c1828" stroke="#0a0a12" stroke-width="4" stroke-linejoin="round"/>
+  </g>
+  <!-- abrigo -->
+  <path d="M 32 84 Q 60 68 88 84 L 96 156 Q 60 172 24 156 Z" fill="#2b3244" stroke="#0a0a12" stroke-width="5" stroke-linejoin="round"/>
+  <path d="M 32 84 Q 60 68 88 84 L 90 100 Q 60 84 30 100 Z" fill="#3a4258" opacity=".9"/>
+  <path d="M 24 156 Q 60 172 96 156 L 94 168 Q 60 184 26 168 Z" fill="#1c1828" stroke="#0a0a12" stroke-width="4" stroke-linejoin="round"/>
+  <!-- solapas y corbata -->
+  <path d="M 46 82 L 60 96 L 74 82 L 68 76 L 60 84 L 52 76 Z" fill="#e8e0cc" stroke="#0a0a12" stroke-width="3" stroke-linejoin="round"/>
+  <polygon points="54,90 66,90 60,118" fill="#ff2e88" stroke="#0a0a12" stroke-width="3" stroke-linejoin="round"/>
+  <line x1="60" y1="96" x2="60" y2="160" stroke="#0a0a12" stroke-width="2.4" opacity=".5"/>
+  <!-- cinturon -->
+  <rect x="30" y="138" width="62" height="10" fill="#171420" stroke="#0a0a12" stroke-width="3"/>
+  <rect x="54" y="138" width="14" height="10" fill="#e8a33d" stroke="#0a0a12" stroke-width="2.4"/>
+  <g class="armA">
+    <path d="M 36 92 Q 18 110 26 146 Q 28 156 36 154 Q 44 152 40 142 Q 34 116 46 100 Z" fill="#2b3244" stroke="#0a0a12" stroke-width="4" stroke-linejoin="round"/>
+    <circle cx="33" cy="150" r="8" fill="#d9a872" stroke="#0a0a12" stroke-width="3.4"/>
+  </g>
+  <!-- cabeza grande -->
+  <g>
+    <ellipse cx="60" cy="50" rx="32" ry="30" fill="#d9a872" stroke="#0a0a12" stroke-width="4.4"/>
+    <path d="M 30 52 q -8 2 -7 10 q 2 8 10 6" fill="#d9a872" stroke="#0a0a12" stroke-width="3"/>
+    <path d="M 29 46 Q 33 16 60 14 Q 89 16 92 46 Q 80 30 60 30 Q 41 30 29 46 Z" fill="#241d2e" stroke="#0a0a12" stroke-width="4" stroke-linejoin="round"/>
+    <path d="M 36 40 q 9 -7 18 -5" fill="none" stroke="#0a0a12" stroke-width="3.6" stroke-linecap="round"/>
+    <path d="M 66 35 q 9 -2 18 5" fill="none" stroke="#0a0a12" stroke-width="3.6" stroke-linecap="round"/>
+    <rect x="36" y="46" width="20" height="14" rx="4" fill="#cfefff" fill-opacity=".12" stroke="#14111c" stroke-width="3.2"/>
+    <rect x="66" y="46" width="20" height="14" rx="4" fill="#cfefff" fill-opacity=".12" stroke="#14111c" stroke-width="3.2"/>
+    <line x1="56" y1="52" x2="66" y2="52" stroke="#14111c" stroke-width="3.2"/>
+    <polygon points="40,49 49,47 44,55" fill="#ffffff" opacity=".55"/>
+    <g class="eyesW">
+      <circle cx="46" cy="53" r="3.2" fill="#14111c"/>
+      <circle cx="76" cy="53" r="3.2" fill="#14111c"/>
+    </g>
+    <path d="M 61 56 q -4 7 0 11" fill="none" stroke="#0a0a12" stroke-width="2.8" stroke-linecap="round"/>
+    <path d="M 50 72 Q 60 77 71 72" fill="none" stroke="#0a0a12" stroke-width="3" stroke-linecap="round"/>
+  </g>
 </g>
 </svg>`;
 }
