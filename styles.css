@@ -126,6 +126,7 @@ kbd{background:var(--ink-3);border:1px solid var(--cyan);border-radius:4px;paddi
 .dock-hint{font-size:.72rem;color:var(--cream-dim);letter-spacing:.12em;opacity:.7}
 
 /* ---------- diálogo ---------- */
+#dialog[hidden]{display:none}
 #dialog{
   position:relative;margin-top:12px;display:flex;gap:14px;align-items:flex-start;
   background:linear-gradient(180deg,rgba(29,29,46,.96),rgba(18,18,28,.96));
