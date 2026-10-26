@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<title>DEPÓSITO CERO — una aventura forense</title>
+<meta name="description" content="Aventura gráfica de investigación y puzles con atmósfera noir y arte ochentero. Una cinta de 1987, una puerta trasera y una pregunta sin respuesta.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="styles.css">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' fill='%2316130e'/%3E%3Ccircle cx='16' cy='16' r='9' fill='none' stroke='%23e8a33d' stroke-width='3'/%3E%3Ccircle cx='16' cy='16' r='3' fill='%23e8a33d'/%3E%3C/svg%3E">
+</head>
+<body>
+<div id="app">
+
+  <header id="topbar">
+    <div class="brand">
+      <span class="brand-rule" aria-hidden="true"></span>
+      <h1>DEPÓSITO&nbsp;CERO</h1>
+      <span class="brand-rule" aria-hidden="true"></span>
+    </div>
+    <nav class="top-actions">
+      <button id="btn-guide" class="deco-btn" type="button">GUÍA</button>
+      <button id="btn-sound" class="deco-btn" type="button" aria-pressed="true">SONIDO</button>
+      <button id="btn-reset" class="deco-btn" type="button">REINICIAR</button>
+    </nav>
+  </header>
+
+  <main>
+    <div id="objective"><span class="obj-label">OBJETIVO</span><span id="objective-text">…</span></div>
+
+    <div id="stage-wrap">
+      <div id="stage"><!-- escena SVG inyectada por game.js --></div>
+      <div id="hs-label" hidden></div>
+      <div id="grain" aria-hidden="true"></div>
+      <div id="vignette" aria-hidden="true"></div>
+    </div>
+
+    <div id="dock">
+      <div id="inventory" aria-label="Inventario"></div>
+      <div class="dock-hint">toca los puntos que brillan · examina todo dos veces</div>
+    </div>
+
+    <div id="dialog" hidden>
+      <div id="dialog-portrait"></div>
+      <div class="dialog-body">
+        <div id="dialog-speaker"></div>
+        <div id="dialog-text"></div>
+        <div id="dialog-choices"></div>
+        <div id="dialog-next" class="dialog-next">▼ toca para seguir</div>
+      </div>
+    </div>
+  </main>
+
+  <footer id="footer">
+    <a href="https://xescotejedor.es">← xescotejedor.es</a>
+    <span class="footer-sep">◆</span>
+    <a href="https://github.com/Xesco-Tejedor/deposito-cero">código en GitHub</a>
+  </footer>
+</div>
+
+<!-- Pantalla de título -->
+<div id="title-screen" class="overlay">
+  <div class="title-card">
+    <div class="sun80" aria-hidden="true"></div>
+    <div class="grid80-wrap" aria-hidden="true"><div class="grid80"></div></div>
+    <p class="title-kicker">UNA AVENTURA FORENSE</p>
+    <h2 class="title-name">DEPÓSITO<br>CERO</h2>
+    <p class="title-sub">1987 dejó una cinta. La cinta sabe quién la lee.</p>
+    <div class="title-actions">
+      <button id="btn-start" class="deco-btn big" type="button">NUEVA PARTIDA</button>
+      <button id="btn-continue" class="deco-btn big" type="button" hidden>CONTINUAR</button>
+      <button id="btn-guide2" class="deco-btn" type="button">GUÍA</button>
+    </div>
+    <p class="title-credits">Arte SVG y música sintetizada, originales · sin material de terceros</p>
+  </div>
+</div>
+
+<!-- Guía -->
+<div id="guide-overlay" class="overlay" hidden>
+  <div class="panel guide-panel">
+    <h3>GUÍA DE LA AVENTURA</h3>
+    <div class="guide-cols">
+      <section>
+        <h4>Cómo se juega</h4>
+        <ul>
+          <li>Toca o haz clic en los puntos de la escena que <strong>brillan en ámbar</strong>: examinar, hablar, recoger y usar.</li>
+          <li>El <strong>inventario</strong> está abajo: toca un objeto para seleccionarlo y luego toca dónde quieres usarlo.</li>
+          <li>Los <strong>diálogos</strong> avanzan tocando la caja de texto. A veces hay opciones de respuesta.</li>
+          <li><kbd>M</kbd> o el botón SONIDO silencia la música. La partida se guarda sola en tu navegador.</li>
+        </ul>
+      </section>
+      <section>
+        <h4>Capítulos</h4>
+        <ol>
+          <li><strong>La cinta</strong> — examina el casete y prueba a volcarlo.</li>
+          <li><strong>El módulo</strong> — consigue las piezas del puente de hardware.</li>
+          <li><strong>La latencia exacta</strong> — sincroniza el bus de datos.</li>
+          <li><strong>La cabecera</strong> — reconstruye los metadatos de la cinta.</li>
+          <li><strong>El Depósito Cero</strong> — lo que la puerta esconde.</li>
+        </ol>
+      </section>
+      <section>
+        <h4>Consejos</h4>
+        <ul>
+          <li>Lee cada descripción: las pistas de los puzles están en las propias escenas y en tu libreta.</li>
+          <li>Si un volcado falla, pregunta: <em>¿qué sabe la cinta de la máquina que la lee?</em></li>
+          <li>El señor Portell no regala nada: escucha sus preguntas.</li>
+          <li>PREMIS ordena la preservación en cuatro ideas: objeto, agente, evento y derechos.</li>
+        </ul>
+      </section>
+    </div>
+    <button id="btn-guide-close" class="deco-btn big" type="button">VOLVER</button>
+  </div>
+</div>
+
+<!-- Puzle: osciloscopio / latencia -->
+<div id="sync-overlay" class="overlay" hidden>
+  <div class="panel sync-panel">
+    <h3>MÓDULO DE RALENTIZACIÓN MICROTEMPORAL</h3>
+    <p class="panel-note">El bus debe respirar al ritmo exacto. Ajusta el módulo hasta que la onda verde cubra a la fantasma.</p>
+    <svg id="scope" viewBox="0 0 600 200" preserveAspectRatio="none" aria-label="Osciloscopio"></svg>
+    <div class="dials">
+      <label>DIVISOR DE RELOJ <output id="out-div">1</output>
+        <input id="dial-div" type="range" min="1" max="8" step="1" value="1">
+      </label>
+      <label>RETARDO (ciclos) <output id="out-ret">0</output>
+        <input id="dial-ret" type="range" min="0" max="7" step="1" value="0">
+      </label>
+      <label>FASE <output id="out-fase">0°</output>
+        <input id="dial-fase" type="range" min="0" max="315" step="45" value="0">
+      </label>
+    </div>
+    <div class="sync-status"><span id="sync-lamp" class="lamp"></span><span id="sync-msg">SIN SINCRONÍA</span></div>
+    <div class="panel-actions">
+      <button id="btn-apply-sync" class="deco-btn big" type="button" disabled>APLICAR AL BUS</button>
+      <button id="btn-sync-close" class="deco-btn" type="button">DEJAR EL MÓDULO</button>
+    </div>
+  </div>
+</div>
+
+<!-- Puzle: cabecera PREMIS -->
+<div id="premis-overlay" class="overlay" hidden>
+  <div class="panel premis-panel">
+    <h3>CABECERA ANÓMALA — ONTOLOGÍA PREMIS</h3>
+    <p class="panel-note">El cargador omite la cabecera ROM estándar y ordena la memoria con una ontología de preservación… que no existía en 1987. Coloca cada etiqueta en su entidad.</p>
+    <div id="premis-tokens" class="premis-tokens"></div>
+    <div id="premis-board" class="premis-board">
+      <div class="premis-entity" data-entity="objecte"><h4>OBJECTE</h4><p class="ent-sub">què es preserva</p><div class="slot"></div></div>
+      <div class="premis-entity" data-entity="agent"><h4>AGENT</h4><p class="ent-sub">qui intervé</p><div class="slot"></div></div>
+      <div class="premis-entity" data-entity="esdeveniment"><h4>ESDEVENIMENT</h4><p class="ent-sub">què hi passa</p><div class="slot"></div></div>
+      <div class="premis-entity" data-entity="drets"><h4>DRETS</h4><p class="ent-sub">qui en té dret</p><div class="slot"></div></div>
+    </div>
+    <div class="sync-status"><span id="premis-lamp" class="lamp"></span><span id="premis-msg">FALTAN ETIQUETAS POR COLOCAR</span></div>
+    <div class="panel-actions">
+      <button id="btn-premis-close" class="deco-btn" type="button">CERRAR</button>
+    </div>
+  </div>
+</div>
+
+<!-- Epílogo -->
+<div id="ending-overlay" class="overlay" hidden>
+  <div class="panel ending-panel">
+    <h3 id="ending-title"></h3>
+    <div id="ending-text" class="ending-text"></div>
+    <div class="panel-actions">
+      <button id="btn-ending-restart" class="deco-btn big" type="button">VOLVER A EMPEZAR</button>
+    </div>
+  </div>
+</div>
+
+<div id="toast" hidden></div>
+
+<script src="game.js"></script>
+</body>
+</html>
