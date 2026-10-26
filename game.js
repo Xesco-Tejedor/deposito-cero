@@ -137,13 +137,13 @@ function noirScene(name,spots,extra=''){
  return `<svg viewBox="0 0 1600 900" preserveAspectRatio="xMidYMid meet" role="img" aria-label="${name}"><image href="${NOIR_DATA[name]}" width="1600" height="900"/>${extra}<g id="hotspots">${spots.map(([id,x,y,w,h])=>`<rect class="hs hs-pulse" data-hs="${id}" x="${x}" y="${y}" width="${w}" height="${h}"/>`).join('')}</g></svg>`;
 }
 function svgTaller(){return noirScene('taller',[
- ['contestador',756,465,113,65],['estanteria',440,279,290,320],['libreta',850,524,120,32],['osciloscopio',878,411,150,110],['crt',1050,369,150,145],['cinta',1180,514,51,31],['cajon',913,569,170,160],['spectrum',1262,529,222,36],['puerta',1430,92,160,420]
+ ['contestador',745,455,120,70],['estanteria',440,279,290,320],['libreta',845,520,150,45],['osciloscopio',878,411,150,110],['crt',1050,369,150,145],['cinta',1145,505,110,70],['cajon',913,569,170,160],['spectrum',1255,515,235,55],['puerta',1430,92,160,420]
 ]);}
 function svgCalle(){return noirScene('calle',[
- ['escaparate',533,449,260,164],['puerta_tienda',832,448,132,205],['farola',183,283,111,410],['a_taller',26,738,151,60]
+ ['escaparate',533,449,260,164],['puerta_tienda',832,448,132,205],['farola',183,283,111,410],['a_taller',10,715,210,105]
 ],rainLines(25,0,840,'noir-rain'));}
 function svgTienda(){return noirScene('tienda',[
- ['portell',940,240,310,295],['cajones',49,170,543,485],['cristales',1336,464,254,110],['radio',774,507,121,65],['a_calle',8,756,186,67]
+ ['portell',940,240,310,295],['cajones',49,170,543,485],['cristales',1336,464,254,110],['radio',760,495,155,95],['a_calle',4,735,225,105]
 ]);}
 function noirDoors(){return [
  [260,"LA MÀ DE L'ALTRE",'porta_altre'],[1100,'LA MEVA MÀ','porta_meua']
@@ -248,6 +248,8 @@ const PORTRAITS = { NICOLAU:portraitNicolau, PORTELL:portraitPortell };
 function say(lines, onDone){
   dlg.lines = lines; dlg.i = 0; dlg.onDone = onDone||null;
   byId('dialog').hidden = false;
+  /* el diálogo puede abrirse bajo el pliegue en pantallas bajas: hacerlo visible */
+  try{ byId('dialog').scrollIntoView({behavior:'smooth', block:'nearest'}); }catch(e){}
   showLine();
 }
 function showLine(){
@@ -333,9 +335,24 @@ function handleHotspot(hs){
   const fn = HS[hs];
   if(fn) fn();
 }
+/* en pantallas táctiles un dedo falla por centímetros: acercar el toque al hotspot más cercano */
+function snapHotspot(e){
+  try{ if(!matchMedia('(pointer:coarse)').matches) return null; }catch(err){ return null; }
+  const sr = byId('stage').getBoundingClientRect();
+  const thr = sr.width * 0.09;
+  let best = null, bestD = thr;
+  document.querySelectorAll('#stage .hs').forEach(h=>{
+    const r = h.getBoundingClientRect();
+    const dx = Math.max(r.left - e.clientX, 0, e.clientX - r.right);
+    const dy = Math.max(r.top - e.clientY, 0, e.clientY - r.bottom);
+    const d = Math.hypot(dx, dy);
+    if(d < bestD){ bestD = d; best = h; }
+  });
+  return best;
+}
 document.addEventListener('DOMContentLoaded', ()=>{
   byId('stage').addEventListener('click', e=>{
-    const hs = e.target.closest('.hs');
+    const hs = e.target.closest('.hs') || snapHotspot(e);
     const sr = byId('stage').getBoundingClientRect();
     if(!hs){
       const xPct = Math.max(4, Math.min(96, (e.clientX - sr.left)/sr.width*100));
