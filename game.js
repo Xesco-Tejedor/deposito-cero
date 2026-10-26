@@ -1691,6 +1691,7 @@ document.addEventListener('DOMContentLoaded', ()=>{
   byId('btn-continue').addEventListener('click', ()=>{
     AudioEngine.init(); load();
     byId('title-screen').hidden = true;
+    renderInventory();
     go(state.scene);
   });
   document.addEventListener('keydown', e=>{
