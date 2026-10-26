@@ -261,11 +261,30 @@ return `<svg viewBox="0 0 1600 900" preserveAspectRatio="xMidYMid slice">
     <text x="52" y="59" fill="#d8cba8" font-size="10" text-anchor="middle" letter-spacing="1">EL PRIORATO</text>
   </g>
 </g>
+<!-- mesita con el contestador -->
+<g>
+  <rect x="822" y="600" width="150" height="14" fill="#26202e"/>
+  <rect x="838" y="614" width="12" height="130" fill="#17141f"/>
+  <rect x="944" y="614" width="12" height="130" fill="#17141f"/>
+  <g>
+    <rect x="830" y="556" width="132" height="46" rx="6" fill="#1b1624" stroke="#3a3044" stroke-width="3"/>
+    <rect x="842" y="568" width="52" height="22" rx="3" fill="#0b0b10"/>
+    <circle cx="856" cy="579" r="6" fill="none" stroke="#c9bda3" stroke-width="2.4"/>
+    <circle cx="880" cy="579" r="6" fill="none" stroke="#c9bda3" stroke-width="2.4"/>
+    <rect x="906" y="570" width="44" height="8" rx="2" fill="#0b0b10"/>
+    <rect x="906" y="584" width="44" height="8" rx="2" fill="#26262e"/>
+    <circle cx="954" cy="566" r="4" fill="#ff2e88" filter="url(#neonP)">
+      <animate attributeName="opacity" values="1;.15;1" dur="1.6s" repeatCount="indefinite"/>
+    </circle>
+    <text x="896" y="618" fill="#c9bda3" font-size="11" text-anchor="middle" opacity=".75" letter-spacing="2">CONTESTADOR</text>
+  </g>
+</g>
 <!-- cables por el suelo -->
 <path d="M 900 700 Q 1000 760 1150 730 T 1400 800" fill="none" stroke="#26262e" stroke-width="6"/>
 <path d="M 700 730 Q 850 790 1050 770" fill="none" stroke="#1d1d2e" stroke-width="6"/>
 <!-- HOTSPOTS -->
 <g id="hotspots">
+  <rect class="hs hs-pulse" data-hs="contestador" x="800" y="530" width="180" height="150"/>
   <rect class="hs hs-pulse" data-hs="estanteria"  x="470"  y="290" width="290" height="345"/>
   <rect class="hs hs-pulse" data-hs="libreta"     x="1136" y="500" width="110" height="62"/>
   <rect class="hs hs-pulse" data-hs="osciloscopio" x="984"  y="462" width="160" height="112"/>
@@ -745,6 +764,19 @@ function tryDump(kind){
 
 const HS = {
   /* ---------- TALLER ---------- */
+  contestador(){
+    if(!F.intro){
+      F.intro = true; save();
+      say([
+        {who:'NICOLAU', text:'Otra madrugada sin caso. Tres meses volcando cintas sanas: nada muere en mi mesa, y eso, en este oficio, casi decepciona.'},
+        {who:'NICOLAU', text:'Esta mañana alguien dejó un paquete en la puerta. Sin remitente. Dentro, una cinta degradada… y una nota.'},
+        {who:'NICOLAU', text:'«Sé que no desecharás una cinta degradada. Sé que no la subirás a ningún servidor. Sé que construirás el puente tú mismo. Cárgala.»'},
+        {who:'NICOLAU', text:'«El Priorato de la Culpa», 1987. No consta en ningún catálogo. Y quien escribe conoce mi metodología mejor que yo.'},
+      ]);
+    } else {
+      say([{who:'NICOLAU', text:'El LED rojo sigue parpadeando, pero el mensaje ya es mío: me lo sé palabra a palabra. Ahora, a trabajar.'}]);
+    }
+  },
   cinta(){
     if(!F.cinta_vista){
       F.cinta_vista = true; addItem('cinta');
@@ -877,6 +909,7 @@ const HS = {
 
 /* etiquetas flotantes de los hotspots */
 const HS_LABELS = {
+  contestador:'CONTESTADOR',
   cinta:'LA CINTA', crt:'EMULADOR (CRT)', spectrum:'ZX 48K', osciloscopio:'BANCO MOD-R1',
   cajon:'CAJÓN', estanteria:'ARCHIVO 1983-1992', libreta:'LIBRETA', puerta:'SALIR',
   escaparate:'ESCAPARATE', puerta_tienda:'ENTRAR', farola:'FAROLA', a_taller:'VOLVER AL TALLER',
@@ -1020,15 +1053,6 @@ function showEnding(kind){
 }
 
 /* ============================ ARRANQUE ============================ */
-function intro(){
-  F.intro = true;
-  say([
-    {who:'NICOLAU', text:'Otra madrugada sin caso. Tres meses volcando cintas sanas: nada muere en mi mesa, y eso, en este oficio, casi decepciona.'},
-    {who:'NICOLAU', text:'Esta mañana alguien dejó un paquete en la puerta. Sin remitente. Dentro, una cinta degradada… y una nota.'},
-    {who:'NICOLAU', text:'«Sé que no desecharás una cinta degradada. Sé que no la subirás a ningún servidor. Sé que construirás el puente tú mismo. Cárgala.»'},
-    {who:'NICOLAU', text:'«El Priorato de la Culpa», 1987. No consta en ningún catálogo. Y quien escribe conoce mi metodología mejor que yo.'},
-  ]);
-}
 document.addEventListener('DOMContentLoaded', ()=>{
   renderInventory();
   ['dial-div','dial-ret','dial-fase'].forEach(id=>byId(id).addEventListener('input', drawScope));
@@ -1054,7 +1078,7 @@ document.addEventListener('DOMContentLoaded', ()=>{
   byId('btn-start').addEventListener('click', ()=>{
     AudioEngine.init();
     byId('title-screen').hidden = true;
-    go('taller'); intro();
+    go('taller');
   });
   const has = (()=>{ try{ return !!localStorage.getItem(SAVE_KEY); }catch(e){ return false; } })();
   byId('btn-continue').hidden = !has;
