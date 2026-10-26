@@ -345,3 +345,15 @@ kbd{background:var(--ink-3);border:1px solid var(--cyan);border-radius:4px;paddi
 @keyframes nicoStrideA{0%,100%{transform:rotate(-10deg)}50%{transform:rotate(10deg)}}
 @keyframes nicoStrideB{0%,100%{transform:rotate(10deg)}50%{transform:rotate(-10deg)}}
 @media(prefers-reduced-motion:reduce){.walker.walking .fig,.walker.walking .legA,.walker.walking .legB{animation:none}.walker.walking .legA{transform:rotate(-7deg)}.walker.walking .legB{transform:rotate(7deg)}}
+
+
+/* v12: shoulder-led arms, opposite their leg, plus worktable-facing pose. */
+.walker .armA,.walker .armB{transform-box:view-box;animation:none;transform:rotate(0deg)}
+.walker.walking .armA{animation:nicoArmA .55s ease-in-out infinite}
+.walker.walking .armB{animation:nicoArmB .55s ease-in-out infinite}
+@keyframes nicoArmA{0%,100%{transform:rotate(6deg)}50%{transform:rotate(-6deg)}}
+@keyframes nicoArmB{0%,100%{transform:rotate(-6deg)}50%{transform:rotate(6deg)}}
+.walker .nico-back{display:none}
+.walker.at-table .nico-front{display:none}
+.walker.at-table .nico-back{display:block}
+@media(prefers-reduced-motion:reduce){.walker.walking .armA,.walker.walking .armB{animation:none;transform:rotate(0deg)}}
