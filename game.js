@@ -1095,7 +1095,7 @@ function save(){ try{ localStorage.setItem(SAVE_KEY, JSON.stringify({scene:state
 function load(){
   try{
     const s = JSON.parse(localStorage.getItem(SAVE_KEY)||'null');
-    if(s && s.flags){ state.scene=s.scene||'taller'; state.inventory=s.inventory||[]; state.flags=s.flags; Object.assign(F, s.flags); return true; }
+    if(s && s.flags){ state.scene=s.scene||'taller'; state.inventory=s.inventory||[]; Object.keys(F).forEach(k=>delete F[k]); Object.assign(F, s.flags); return true; }
   }catch(e){}
   return false;
 }
