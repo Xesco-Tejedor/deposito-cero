@@ -161,6 +161,7 @@ const ICONS = {
   z80:`<svg viewBox="0 0 48 48"><rect x="10" y="12" width="28" height="24" rx="2" fill="#0b0b10" stroke="#3a3a44" stroke-width="2"/><text x="24" y="28" fill="#c9bda3" font-size="9" text-anchor="middle" font-family="monospace">Z80A</text><g stroke="#c9bda3" stroke-width="2">${Array.from({length:6},(_,i)=>`<line x1="${13+i*4.4}" y1="6" x2="${13+i*4.4}" y2="12"/><line x1="${13+i*4.4}" y1="36" x2="${13+i*4.4}" y2="42"/>`).join('')}</g></svg>`,
   cristal:`<svg viewBox="0 0 48 48"><rect x="14" y="14" width="20" height="16" rx="4" fill="#c9bda3" stroke="#8f8266" stroke-width="2"/><line x1="18" y1="30" x2="18" y2="40" stroke="#c9bda3" stroke-width="3"/><line x1="30" y1="30" x2="30" y2="40" stroke="#c9bda3" stroke-width="3"/><text x="24" y="25" fill="#0b0b10" font-size="7.5" text-anchor="middle" font-family="monospace">3.5M</text></svg>`,
   cable:`<svg viewBox="0 0 48 48"><path d="M 6 34 Q 14 14 24 24 T 42 20" fill="none" stroke="#2de2ff" stroke-width="4"/><rect x="2" y="30" width="8" height="10" rx="2" fill="#3a3a44"/><rect x="38" y="14" width="8" height="10" rx="2" fill="#3a3a44"/></svg>`,
+  chasis:`<svg viewBox="0 0 48 48"><rect x="5" y="12" width="38" height="24" rx="3" fill="#3a3a44" stroke="#8f8266" stroke-width="2"/><rect x="9" y="16" width="30" height="16" rx="2" fill="#0b0b10" stroke="#2de2ff" stroke-width="1"/><g fill="#c9bda3"><circle cx="9" cy="15" r="1.5"/><circle cx="39" cy="15" r="1.5"/><circle cx="9" cy="33" r="1.5"/><circle cx="39" cy="33" r="1.5"/></g><text x="24" y="27" fill="#2de2ff" font-size="8" text-anchor="middle" font-family="monospace">MOD-R1</text></svg>`,
   modulo:`<svg viewBox="0 0 48 48"><rect x="6" y="10" width="36" height="28" rx="4" fill="#17131f" stroke="#2de2ff" stroke-width="2"/><rect x="11" y="16" width="18" height="10" rx="2" fill="#050d08"/><path d="M 13 21 q 3 -5 6 0 t 6 0" fill="none" stroke="#59d98c" stroke-width="1.6"/><circle cx="35" cy="20" r="2.6" fill="#ff2e88"/><circle cx="35" cy="28" r="2.6" fill="#59d98c"/></svg>`,
   libreta:`<svg viewBox="0 0 48 48"><rect x="9" y="6" width="30" height="36" rx="2" fill="#c9bda3"/><rect x="9" y="6" width="6" height="36" fill="#8f8266"/><g stroke="#7a6f57" stroke-width="1.6">${Array.from({length:4},(_,i)=>`<line x1="19" y1="${14+i*7}" x2="35" y2="${14+i*7}"/>`).join('')}</g></svg>`,
 };
@@ -239,6 +240,7 @@ function go(scene){
 }
 function renderScene(){
   byId('stage').innerHTML = SCENES[state.scene]();
+  byId('hs-label').hidden = true;
   renderObjective();
 }
 
@@ -368,7 +370,7 @@ document.addEventListener('DOMContentLoaded', ()=>{
   byId('stage').addEventListener('pointerover', e=>{
     const hs = e.target.closest('.hs');
     const lab = byId('hs-label');
-    if(hs){ lab.textContent = hs.dataset.label||''; lab.hidden = !hs.dataset.label; }
+    if(hs){ lab.textContent = hs.dataset.label||''; lab.hidden = !hs.dataset.label; clearTimeout(lab._tm); if(e.pointerType==='touch') lab._tm=setTimeout(()=>{ lab.hidden = true; },1400); }
   });
   byId('stage').addEventListener('pointerout', ()=>{ byId('hs-label').hidden = true; });
 });
