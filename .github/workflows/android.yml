@@ -1,0 +1,172 @@
+name: Android APK
+on:
+  workflow_dispatch:
+permissions:
+  contents: write
+jobs:
+  android:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    env:
+      DC_KEYSTORE_B64: ${{ secrets.DC_KEYSTORE_B64 }}
+      DC_KEYSTORE_PASS: ${{ secrets.DC_KEYSTORE_PASS }}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: '17'
+      - uses: android-actions/setup-android@v3
+      - run: sdkmanager 'platforms;android-35' 'build-tools;35.0.0'
+      - name: Prepare Android source
+        run: |
+          mkdir -p android
+          cat > android/MainActivity.java <<'FILE_END'
+          package es.xescotejedor.depositocero;
+          import android.app.*;
+          import android.os.*;
+          import android.content.*;
+          import android.graphics.Color;
+          import android.net.Uri;
+          import android.view.*;
+          import android.webkit.*;
+          public class MainActivity extends Activity {
+           public WebView web;
+           @Override public void onCreate(Bundle state){super.onCreate(state);
+            getWindow().setStatusBarColor(Color.rgb(18,16,12));getWindow().setNavigationBarColor(Color.rgb(18,16,12));
+            android.widget.FrameLayout root=new android.widget.FrameLayout(this);root.setBackgroundColor(Color.rgb(18,16,12));
+            root.setOnApplyWindowInsetsListener((v,insets)->{root.setPadding(insets.getSystemWindowInsetLeft(),insets.getSystemWindowInsetTop(),insets.getSystemWindowInsetRight(),insets.getSystemWindowInsetBottom());return insets;});
+            web=new WebView(this);root.addView(web);setContentView(root);web.setBackgroundColor(Color.rgb(18,16,12));
+            WebSettings s=web.getSettings();s.setJavaScriptEnabled(true);s.setDomStorageEnabled(true);s.setAllowFileAccess(true);s.setAllowContentAccess(false);s.setAllowFileAccessFromFileURLs(false);s.setAllowUniversalAccessFromFileURLs(false);s.setMediaPlaybackRequiresUserGesture(true);
+            web.setWebChromeClient(new WebChromeClient(){@Override public boolean onJsConfirm(WebView view,String url,String message,JsResult result){new AlertDialog.Builder(MainActivity.this).setMessage(message).setPositiveButton("Sí",(d,w)->result.confirm()).setNegativeButton("Cancelar",(d,w)->result.cancel()).setOnCancelListener(d->result.cancel()).show();return true;}});
+            web.setWebViewClient(new WebViewClient(){@Override public boolean shouldOverrideUrlLoading(WebView v,WebResourceRequest request){Uri u=request.getUrl();if("file".equals(u.getScheme()))return false;if("https".equals(u.getScheme())||"http".equals(u.getScheme()))try{startActivity(new Intent(Intent.ACTION_VIEW,u));}catch(ActivityNotFoundException e){}return true;}});
+            if(state!=null)web.restoreState(state);else web.loadUrl("file:///android_asset/index.html");
+           }
+           @Override protected void onSaveInstanceState(Bundle b){web.saveState(b);super.onSaveInstanceState(b);}
+           @Override protected void onPause(){web.evaluateJavascript("if(typeof AudioEngine!=='undefined'&&AudioEngine.ctx)AudioEngine.ctx.suspend()",null);web.onPause();super.onPause();}
+           @Override protected void onResume(){super.onResume();if(web!=null){web.onResume();web.evaluateJavascript("if(typeof AudioEngine!=='undefined'&&AudioEngine.ctx&&AudioEngine.playing)AudioEngine.ctx.resume()",null);}}
+           @Override public void onBackPressed(){new AlertDialog.Builder(this).setTitle("Depósito Cero").setMessage("¿Salir? La partida se guarda automáticamente.").setPositiveButton("Salir",(d,w)->finish()).setNegativeButton("Seguir jugando",null).show();}
+          }
+          FILE_END
+          cat > android/AndroidManifest.xml <<'FILE_END'
+          <manifest xmlns:android="http://schemas.android.com/apk/res/android" package="es.xescotejedor.depositocero" android:versionCode="1" android:versionName="1.0">
+          <uses-sdk android:minSdkVersion="26" android:targetSdkVersion="35"/>
+          <application android:label="Depósito Cero" android:icon="@drawable/icon" android:allowBackup="false" android:usesCleartextTraffic="false" android:theme="@android:style/Theme.Material.NoActionBar">
+          <activity android:name=".MainActivity" android:exported="true" android:configChanges="orientation|screenSize|keyboardHidden"><intent-filter><action android:name="android.intent.action.MAIN"/><category android:name="android.intent.category.LAUNCHER"/></intent-filter></activity>
+          </application></manifest>
+          FILE_END
+          cat > android/TestManifest.xml <<'FILE_END'
+          <manifest xmlns:android="http://schemas.android.com/apk/res/android" package="es.xescotejedor.depositocero.tests"><uses-sdk android:minSdkVersion="26" android:targetSdkVersion="35"/><instrumentation android:name="es.xescotejedor.depositocero.GameTest" android:targetPackage="es.xescotejedor.depositocero"/><application android:label="Depósito Cero tests"/></manifest>
+          FILE_END
+          cat > android/prepare.py <<'FILE_END'
+          from pathlib import Path
+          import re,urllib.request
+          p=Path('out/assets/index.html'); s=p.read_text();s=re.sub(r'<link[^>]+(?:fonts.googleapis.com|fonts.gstatic.com)[^>]*>','',s);s=s.replace('</head>','<style>@font-face{font-family:"Space Grotesk";src:url("space-grotesk.ttf")} html{overscroll-behavior:none}</style></head>');p.write_text(s)
+          # Official Google Fonts repository includes the font and its open font license.
+          base='https://raw.githubusercontent.com/google/fonts/main/ofl/spacegrotesk/'
+          for src,dst in [('SpaceGrotesk[wght].ttf','space-grotesk.ttf'),('OFL.txt','SPACE-GROTESK-LICENSE.txt')]:
+           urllib.request.urlretrieve(base+urllib.parse.quote(src),'out/assets/'+dst)
+          Path('out/res/drawable/icon.xml').write_text('''<vector xmlns:android="http://schemas.android.com/apk/res/android" android:width="108dp" android:height="108dp" android:viewportWidth="108" android:viewportHeight="108"><path android:fillColor="#16130e" android:pathData="M0,0h108v108h-108z"/><path android:strokeColor="#e8a33d" android:strokeWidth="6" android:fillColor="#00000000" android:pathData="M54,23a31,31 0,1 0,0 62a31,31 0,1 0,0 -62"/><path android:fillColor="#e8a33d" android:pathData="M54,43a11,11 0,1 0,0 22a11,11 0,1 0,0 -22"/></vector>''')
+          assert 'fonts.googleapis.com' not in s
+          FILE_END
+          cat > android/build.sh <<'FILE_END'
+          #!/usr/bin/env bash
+          set -euo pipefail
+          SDK="${ANDROID_HOME:-${ANDROID_SDK_ROOT}}"
+          BT=$(find "$SDK/build-tools" -mindepth 1 -maxdepth 1 -type d | sort -V | tail -1)
+          JAR="$SDK/platforms/android-35/android.jar"
+          mkdir -p out/classes out/dex out/res/drawable out/assets out/testclasses out/testdex evidence
+          cp index.html game.js styles.css out/assets/
+          python3 android/prepare.py
+          "$BT/aapt" package -f -M android/AndroidManifest.xml -S out/res -A out/assets -I "$JAR" -F out/base.apk
+          javac -encoding UTF-8 -source 8 -target 8 -classpath "$JAR" -d out/classes android/MainActivity.java
+          "$BT/d8" --lib "$JAR" --min-api 26 --output out/dex $(find out/classes -name '*.class')
+          cp out/base.apk out/unsigned.apk
+          (cd out/dex && zip -q ../unsigned.apk classes.dex)
+          "$BT/zipalign" -f 4 out/unsigned.apk out/aligned.apk
+          printf '%s' "$DC_KEYSTORE_B64" | base64 -d > "$RUNNER_TEMP/deposito.jks"
+          "$BT/apksigner" sign --ks "$RUNNER_TEMP/deposito.jks" --ks-key-alias deposito-cero --ks-pass env:DC_KEYSTORE_PASS --key-pass env:DC_KEYSTORE_PASS --out out/deposito-cero-1.0.apk out/aligned.apk
+          "$BT/apksigner" verify --verbose --print-certs out/deposito-cero-1.0.apk > evidence/signature.txt
+          "$BT/aapt" dump badging out/deposito-cero-1.0.apk > evidence/package.txt
+          "$BT/aapt" package -f -M android/TestManifest.xml -I "$JAR" -F out/testbase.apk
+          javac -encoding UTF-8 -source 8 -target 8 -classpath "$JAR:out/classes" -d out/testclasses android/GameTest.java
+          "$BT/d8" --lib "$JAR" --min-api 26 --output out/testdex $(find out/testclasses -name '*.class')
+          (cd out/testdex && zip -q ../testbase.apk classes.dex)
+          "$BT/zipalign" -f 4 out/testbase.apk out/testaligned.apk
+          "$BT/apksigner" sign --ks "$RUNNER_TEMP/deposito.jks" --ks-key-alias deposito-cero --ks-pass env:DC_KEYSTORE_PASS --key-pass env:DC_KEYSTORE_PASS --out out/tests.apk out/testaligned.apk
+          rm "$RUNNER_TEMP/deposito.jks"
+          sha256sum out/deposito-cero-1.0.apk > evidence/SHA256SUMS.txt
+          FILE_END
+          cat > android/GameTest.java <<'FILE_END'
+          package es.xescotejedor.depositocero;
+          import android.app.*;import android.os.*;import android.graphics.*;import java.io.*;import java.util.concurrent.*;import android.view.*;
+          public class GameTest extends Instrumentation{
+           MainActivity a;
+           @Override public void onCreate(Bundle b){super.onCreate(b);start();}
+           String js(String code)throws Exception{CountDownLatch l=new CountDownLatch(1);String[] r={null};runOnMainSync(()->a.web.evaluateJavascript(code,v->{r[0]=v;l.countDown();}));if(!l.await(15,TimeUnit.SECONDS))throw new Exception("JS timeout");return r[0];}
+           void ok(String expr)throws Exception{String r=js("Boolean("+expr+")");if(!"true".equals(r))throw new Exception("ASSERT "+expr+" got "+r);}
+           void shot(String name)throws Exception{Bitmap b=getUiAutomation().takeScreenshot();FileOutputStream f=new FileOutputStream(new File(getTargetContext().getExternalFilesDir(null),name+".png"));b.compress(Bitmap.CompressFormat.PNG,100,f);f.close();}
+           void tap(String selector)throws Exception{String r=js("(function(){let e=document.querySelector("+quote(selector)+");e.scrollIntoView({block:'center'});let r=e.getBoundingClientRect();return [r.x+r.width/2,r.y+r.height/2]})()");r=r.replace("[","").replace("]","");String[] xy=r.split(",");float density=a.getResources().getDisplayMetrics().density;float x=Float.parseFloat(xy[0])*density,y=Float.parseFloat(xy[1])*density;int[] off={0,0};runOnMainSync(()->a.web.getLocationOnScreen(off));long t=SystemClock.uptimeMillis();sendPointerSync(MotionEvent.obtain(t,t,0,x+off[0],y+off[1],0));sendPointerSync(MotionEvent.obtain(t,t+80,1,x+off[0],y+off[1],0));Thread.sleep(800);}
+           static String quote(String s){return "'"+s.replace("'","\\'")+"'";}
+           void clearDialog()throws Exception{for(int i=0;i<30;i++){if("true".equals(js("document.getElementById('dialog').hidden")))return;js("finishType();advanceDialog()");}throw new Exception("dialog never closed");}
+           void hs(String id)throws Exception{tap("[data-hs="+id+"]");Thread.sleep(1800);clearDialog();}
+           @Override public void onStart(){Bundle b=new Bundle();try{
+            a=(MainActivity)startActivitySync(new android.content.Intent(getTargetContext(),MainActivity.class).addFlags(android.content.Intent.FLAG_ACTIVITY_NEW_TASK));Thread.sleep(2500);
+            ok("document.title.includes('DEPÓSITO')");shot("01-title");tap("#btn-start");tap("#intro-skip");hs("contestador");hs("cinta");ok("state.inventory.includes('cinta')");shot("02-taller");
+            js("state.selItem='cinta';handleHotspot('crt')");clearDialog();js("state.selItem='cinta';handleHotspot('spectrum')");clearDialog();ok("F.real_fallado&&F.emulador_fallado");
+            hs("cajon");hs("estanteria");hs("libreta");hs("puerta");hs("puerta_tienda");hs("portell");ok("F.portell_ok");shot("03-portell");
+            js("HS.cajones();finishType();advanceDialog();finishType()");tap("#dialog-choices button:nth-child(2)");clearDialog();js("HS.cristales();finishType()");tap("#dialog-choices button:nth-child(1)");clearDialog();ok("hasItem('z80')&&hasItem('cristal')");
+            hs("a_calle");hs("a_taller");hs("osciloscopio");ok("F.modulo");js("state.selItem='modulo';handleHotspot('spectrum')");js("byId('dial-div').value=4;byId('dial-ret').value=2;byId('dial-fase').value=90;drawScope()");
+            shot("04-sync");
+            tap("#btn-apply-sync");clearDialog();js("HS.crt()");clearDialog();ok("F.dump_ok");
+            String[] entities={"objecte","agent","esdeveniment","drets"};
+            for(String en:entities){js("premisSel=PREMIS.find(t=>t.entity==='"+en+"').id");tap("[data-entity="+en+"]");}
+            Thread.sleep(2000);clearDialog();ok("state.scene==='deposito'&&F.premis_ok");shot("05-deposito");hs("missatge");hs("porta_meua");ok("!byId('ending-overlay').hidden");shot("06-ending");
+            js("byId('ending-overlay').hidden=true;byId('btn-start').click();NoirIntro.close();HS.cinta()");clearDialog();ok("localStorage.getItem(SAVE_KEY)!==null");
+            a.finish();Thread.sleep(1000);a=(MainActivity)startActivitySync(new android.content.Intent(getTargetContext(),MainActivity.class).addFlags(android.content.Intent.FLAG_ACTIVITY_NEW_TASK));Thread.sleep(2000);tap("#btn-continue");ok("hasItem('cinta')");shot("07-restored");
+            ok("AudioEngine.ctx&&AudioEngine.ctx.state==='running'");tap("#btn-guide");shot("08-guide");
+            b.putString("result","PASS: offline full ending, tap targets, puzzles, save/relaunch, audio context, guide");finish(Activity.RESULT_OK,b);
+           }catch(Throwable e){b.putString("result","FAIL "+e.toString());try{shot("failure");}catch(Exception ignored){}finish(Activity.RESULT_CANCELED,b);}}
+          }
+          FILE_END
+          cat > android/run-test.sh <<'FILE_END'
+          #!/bin/bash
+          set -euo pipefail
+          adb shell svc wifi disable
+          adb shell svc data disable
+          adb install out/deposito-cero-1.0.apk
+          adb install out/tests.apk
+          adb shell am instrument -w es.xescotejedor.depositocero.tests/es.xescotejedor.depositocero.GameTest | tee evidence/instrumentation.txt
+          adb pull /sdcard/Android/data/es.xescotejedor.depositocero/files/. evidence/ || true
+          adb logcat -d -s AndroidRuntime:E chromium:E > evidence/android-errors.txt
+          if ! grep -q 'PASS: offline full ending' evidence/instrumentation.txt; then exit 1; fi
+          FILE_END
+      - name: Build signed offline APK
+        run: bash android/build.sh
+      - name: Emulator permissions
+        run: |
+          echo 'KERNEL=="kvm", GROUP="kvm", MODE="0666", OPTIONS+="static_node=kvm"' | sudo tee /etc/udev/rules.d/99-kvm4all.rules
+          sudo udevadm control --reload-rules
+          sudo udevadm trigger --name-match=kvm
+      - name: Play through APK offline
+        uses: reactivecircus/android-emulator-runner@v2
+        with:
+          api-level: 35
+          arch: x86_64
+          profile: pixel_2
+          disable-animations: true
+          script: bash android/run-test.sh
+      - name: Save evidence
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: android-evidence
+          path: |
+            evidence/
+            out/deposito-cero-1.0.apk
+      - name: Publish verified APK
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          tar czf out/android-evidence.tar.gz evidence
+          gh release create android-v1.0 out/deposito-cero-1.0.apk out/android-evidence.tar.gz evidence/SHA256SUMS.txt --title 'Depósito Cero 1.0 para Android' --notes 'Juego completo integrado y sin conexión. Android 8 o posterior. Firma propia del proyecto. Incluye música, ilustraciones y guardado local. Verificado en emulador Android 15 con recorrido completo hasta un final, puzles, guía y guardado al relanzar. La partida del navegador no se transfiere automáticamente. Instalación: descargar el APK y permitir la instalación desde la aplicación usada para descargarlo. No publicado en Google Play.'
