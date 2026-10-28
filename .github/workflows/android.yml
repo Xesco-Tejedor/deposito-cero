@@ -302,7 +302,7 @@ jobs:
             Thread.sleep(2000);clearDialog();ok("state.scene==='deposito'&&F.premis_ok");shot("05-deposito");hs("missatge");hs("porta_meua");ok("!byId('ending-overlay').hidden");shot("06-ending");
             js("byId('ending-overlay').hidden=true;byId('btn-start').click();NoirIntro.close();HS.cinta()");clearDialog();ok("localStorage.getItem(SAVE_KEY)!==null");
             runOnMainSync(()->a.finish());Thread.sleep(1000);a=(MainActivity)startActivitySync(new android.content.Intent(getTargetContext(),MainActivity.class).addFlags(android.content.Intent.FLAG_ACTIVITY_NEW_TASK));Thread.sleep(2000);tap("#btn-continue");ok("hasItem('cinta')");shot("07-restored");
-            ok("AudioEngine.ctx&&AudioEngine.ctx.state==='running'");tap("#btn-guide");js("document.getElementById('full-guide').hidden=false");ok("document.querySelector('#full-guide iframe').contentDocument.body.innerText.includes('Cómo ver los dos finales')");shot("08-guide");
+            ok("AudioEngine.ctx&&AudioEngine.ctx.state==='running'");tap("#btn-guide");tap("#guide-overlay button[onclick]");Thread.sleep(1200);ok("document.querySelector('#full-guide iframe').contentDocument.body.innerText.includes('Cómo ver los dos finales')");shot("08-guide");tap("#full-guide > button");ok("byId('full-guide').hidden&&hasItem('cinta')");
             b.putString("result","PASS: offline full ending, tap targets, puzzles, save/relaunch, audio context, guide");finish(Activity.RESULT_OK,b);
            }catch(Throwable e){b.putString("result","FAIL "+e.toString());try{shot("failure");}catch(Exception ignored){}finish(Activity.RESULT_CANCELED,b);}}
           }
@@ -347,4 +347,8 @@ jobs:
           GH_TOKEN: ${{ github.token }}
         run: |
           tar czf out/android-evidence.tar.gz evidence
-          gh release create android-v1.0 out/deposito-cero-1.0.apk out/android-evidence.tar.gz evidence/SHA256SUMS.txt --title 'Depósito Cero 1.0 para Android' --notes 'Juego completo integrado y sin conexión. Android 8 o posterior. Firma propia del proyecto. Incluye música, ilustraciones y guardado local. Verificado en emulador Android 15 con recorrido completo hasta un final, puzles, guía y guardado al relanzar. La partida del navegador no se transfiere automáticamente. Instalación: descargar el APK y permitir la instalación desde la aplicación usada para descargarlo. No publicado en Google Play.'
+          if gh release view android-v1.0 >/dev/null 2>&1; then
+            gh release upload android-v1.0 out/deposito-cero-1.0.apk out/android-evidence.tar.gz evidence/SHA256SUMS.txt --clobber
+          else
+            gh release create android-v1.0 out/deposito-cero-1.0.apk out/android-evidence.tar.gz evidence/SHA256SUMS.txt --title 'Depósito Cero 1.0 para Android' --notes 'Juego completo integrado y sin conexión. Android 8 o posterior. Firma propia del proyecto. Incluye música, ilustraciones y guardado local. Verificado en emulador Android 15 con recorrido completo hasta un final, puzles, guía y guardado al relanzar. La partida del navegador no se transfiere automáticamente. Instalación: descargar el APK y permitir la instalación desde la aplicación usada para descargarlo. No publicado en Google Play.'
+          fi
