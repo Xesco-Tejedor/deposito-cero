@@ -264,7 +264,9 @@ jobs:
           "$BT/apksigner" sign --ks "$RUNNER_TEMP/deposito.jks" --ks-key-alias deposito-cero --ks-pass env:DC_KEYSTORE_PASS --key-pass env:DC_KEYSTORE_PASS --out out/deposito-cero-1.0.apk out/aligned.apk
           "$BT/apksigner" verify --verbose --print-certs out/deposito-cero-1.0.apk > evidence/signature.txt
           "$BT/aapt" dump badging out/deposito-cero-1.0.apk > evidence/package.txt
-          "$BT/aapt" package -f -M android/TestManifest.xml -I "$JAR" -F out/testbase.apk
+          mkdir -p out/testmanifest
+          cp android/TestManifest.xml out/testmanifest/AndroidManifest.xml
+          "$BT/aapt" package -f -M out/testmanifest/AndroidManifest.xml -I "$JAR" -F out/testbase.apk
           javac -encoding UTF-8 -source 8 -target 8 -classpath "$JAR:out/classes" -d out/testclasses android/GameTest.java
           "$BT/d8" --lib "$JAR" --min-api 26 --output out/testdex $(find out/testclasses -name '*.class')
           (cd out/testdex && zip -q ../testbase.apk classes.dex)
